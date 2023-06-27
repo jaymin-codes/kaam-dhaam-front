@@ -3,12 +3,12 @@ import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import WelcomePage from "./components/Pages/Welcome-Page/WelcomePage";
-import SignUpPage from "./components/Pages/SignUp-Student/SignUpPage";
-import SignUpPageCo from "./components/Pages/SignUp-Company/SignUpPageCo";
-import LoginPage from "./components/Pages/Login-Page/LoginPage";
-import ProfileStudent from "./components/Pages/Profile-Student/ProfileStudent";
-import OtpVerif from "./components/Pages/OTP-verification/otpVerif";
+import WelcomePage from "../src/components/Pages/Welcome-Page/WelcomePage"
+import SignUpPage from "../src/components/Pages/SignUp-Student/SignUpPage";
+import SignUpPageCo from "../src/components/Pages/SignUp-Company/SignUpPageCo";
+import LoginPage from "../src/components/Pages/Login-Page/LoginPage";
+import ProfileStudent from "../src/components/Pages/Profile-Student/ProfileStudent";
+import OtpVerif from "../src/components/Pages/OTP-verification/otpVerif";
 
 
 function App() {
