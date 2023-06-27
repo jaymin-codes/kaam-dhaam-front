@@ -1,0 +1,30 @@
+/* .main-form{
+    background-color: rgb(228, 228, 228);
+    
+} */
+body{
+    color: rgb(62, 62, 62);
+
+}
+.labels{
+    margin-bottom: 5px;
+}
+.input{
+    margin-bottom: 10px;
+    height: 40px;
+    border: 2px solid;
+    border-radius: 15px;
+}
+
+.side{
+    background-image: linear-gradient(234deg,
+      hsl(199deg 82% 65%) 1%,
+      hsl(200deg 80% 61%) 44%,
+      hsl(202deg 77% 57%) 50%,
+      hsl(204deg 75% 53%) 51%,
+      hsl(206deg 72% 50%) 50%,
+      hsl(209deg 71% 48%) 49%,
+      hsl(214deg 65% 48%) 50%,
+      hsl(221deg 57% 48%) 56%,
+      hsl(231deg 48% 48%) 99%);
+}
