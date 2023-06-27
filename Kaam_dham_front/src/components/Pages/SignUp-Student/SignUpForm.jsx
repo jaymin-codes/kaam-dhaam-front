@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 function SignUpForm() {
   const navigate = useNavigate();
-  const OtpButtonClick = () => {
-    navigate("/otp_verification");
-  };
+  // const OtpButtonClick = () => {
+  //   navigate("/otp_verification");
+  // };
 
   const {
     register,
@@ -43,6 +43,7 @@ function SignUpForm() {
         console.error('Error:', error);
     });
     alert('Submitted')
+    navigate("/otp_verification")
     }
     
   // console.log(errors);
@@ -114,7 +115,7 @@ function SignUpForm() {
               </div>
               <div className="flex items-center justify-center">
                 <Button
-                  onClick={OtpButtonClick}
+                  type=""
                   className="mt-2 font-semibold bg-green-500 text-black"
                 >
                   Submit
