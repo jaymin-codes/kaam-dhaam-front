@@ -20,8 +20,7 @@ function SignUpForm() {
   const [userInfo, setUserInfo] = useState();
   const onSubmit = (data) => {
     setUserInfo(data);
-    console.log(data);
-    var Url="http://127.0.0.1:8000/user/issue_otp"
+    var Url=window.API_PREFIX+"user/issue_otp"
     fetch(Url, {
         method: "POST",
         headers:{
@@ -36,17 +35,24 @@ function SignUpForm() {
     .then(response => response.json()) // Parse the response as JSON
     .then(data => {
         // Handle the data returned from the API
-        console.log(data); // You can do whatever you want with the data here
+        
+        if (data["status"] === "1") {
+          alert('Submitted')
+          navigate("/otp_verification",{ state: { data: data } })
+
+        } else {
+          alert(data['message'])
+        }
+        // You can do whatever you want with the data here
     })
     .catch(error => {
         // Handle any errors that occurred during the request
         console.error('Error:', error);
     });
-    alert('Submitted')
-    navigate("/otp_verification")
+    
     }
     
-  // console.log(errors);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -59,7 +65,7 @@ function SignUpForm() {
         </div>
 
         <div className="flex flex-col items-center justify-center md:w-1/2 m-2 p-4">
-          <pre>{JSON.stringify(userInfo, undefined)}</pre>
+          {/* <pre>{JSON.stringify(userInfo, undefined)}</pre> */}
           <h1 className="text-2xl"></h1>
           <form action="" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-input">

@@ -22,7 +22,43 @@ function LoginForm() {
   const [loginInfo, setLoginInfo] = useState();
   const onSubmit = (data) => {
     setLoginInfo(data);
-    console.log(data);
+    var Url=window.API_PREFIX+"user/login"
+    fetch(Url, {
+        method: "POST",
+        headers:{
+            "Content-type": "application/json",
+
+        },
+        body: JSON.stringify({
+          Email:data['loginEmail'],
+          Password:data['loginPassword'],
+        }),
+    })
+    
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+        // Handle the data returned from the API
+        
+        if (data["status"] === "1") {
+          console.log(data["Token"])
+          localStorage.setItem("SToken", data["Token"]);
+          navigate("/profile_student")
+
+        } 
+        else if (data["status"] === "0") {
+          alert(data['message'])
+
+        } 
+        else {
+          alert(data['message'])
+        }
+        // You can do whatever you want with the data here
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error('Error:', error);
+    });
+    
   };
 
   return (

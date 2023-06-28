@@ -10,7 +10,7 @@ import LoginPage from "../src/components/Pages/Login-Page/LoginPage";
 import ProfileStudent from "../src/components/Pages/Profile-Student/ProfileStudent";
 import OtpVerif from "../src/components/Pages/OTP-verification/otpVerif";
 
-
+window.API_PREFIX = 'http://localhost:8000/'
 function App() {
   return (
     <>

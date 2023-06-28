@@ -1,22 +1,63 @@
 import NavBar from "../../Navbar/Navbar";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { Button } from "react-bootstrap";
 import "./OtpVerif.css";
 import { motion } from "framer-motion";
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 // import { useForm } from "react-hook-form";
 
 function OtpVerif() {
-  const [otp, setOtp] = useState("");
 
+  
+  const [otp, setOtp] = useState("");
+  const [pdata,setdata]=useState({})
+  const navigate = useNavigate();
+  const location = useLocation();
+  const receivedDictionary = location.state?.data || {};
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
     const numbersOnly = inputValue.replace(/\D/g, "").slice(0, 4);
     setOtp(numbersOnly);
+    
   };
-
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("OTP:", otp); 
+    if (receivedDictionary["otp"]===otp){
+      var Url=window.API_PREFIX+"user/register_user"
+      fetch(Url, {
+        method: "POST",
+        headers:{
+            "Content-type": "application/json",
+
+        },
+        body: JSON.stringify({
+          Name:receivedDictionary['old_data']['name']['username'],
+          Email:receivedDictionary['old_data']['name']['email'],
+          Password:receivedDictionary['old_data']['name']['password']
+        }),
+    })
+    
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+        // Handle the data returned from the API
+        if (data["status"] === "1") {
+          navigate("/login")
+
+        } else {
+          alert(data['message'])
+        }
+        // You can do whatever you want with the data here
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error('Error:', error);
+    });
+    }
+    else{
+      alert("Wrond OTP")
+    }
   };
 
   
