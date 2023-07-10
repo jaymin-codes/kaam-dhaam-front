@@ -9,7 +9,7 @@ import SignUpPageCo from "../src/components/Pages/SignUp-Company/SignUpPageCo";
 import LoginPage from "../src/components/Pages/Login-Page/LoginPage";
 import ProfileStudent from "../src/components/Pages/Profile-Student/ProfileStudent";
 import OtpVerif from "../src/components/Pages/OTP-verification/otpVerif";
-
+import Userprofile from "../src/components/Pages/Userprofile/Userprofile";
 window.API_PREFIX = 'http://localhost:8000/'
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
           <Route path="/otp_verification" element={<OtpVerif />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile_student" element={<ProfileStudent />} />
+          <Route path="/userprofile" element={<Userprofile />} />
         </Routes>
       </div>
     </>

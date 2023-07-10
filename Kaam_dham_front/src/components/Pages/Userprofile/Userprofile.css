@@ -1,0 +1,57 @@
+.sidebar_main_division {
+    width: 25%;
+    /* padding-right: 15px; */
+}
+.sidebar_division {
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+}
+.sidebar_img_profile{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+.sidebar_img_profile_main_division{
+    display: flex;
+    justify-content: center;
+  }
+  .sidebar_profile_person_name{
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+  }
+  .sidebar_location_division{
+    font-size: var(--theme-description);
+    display: flex;
+    justify-content: center;
+    color: var(--theme-table-color);
+  }
+  .sidebar_birthdate_icon_cake_location{
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+  }
+  .sidebar_dashboard_title_division_active{
+    color: var(--theme-color-blue);
+    border-top: 1px solid var(--doctor-booking-border);
+    font-size: var(--theme-title-main);
+    cursor: pointer;
+    padding: 15px;
+  }
+  .sidebar_dashboard_title_division{
+    padding: 15px;
+    border-top: 1px solid var(--doctor-booking-border);
+    color: var(--theme-table-color);
+    font-size: var(--theme-title-main);
+    cursor: pointer;
+    padding: 15px;
+  }
+  .sidebar_dashboard_title_division:hover{
+    color: var(--theme-color-blue);
+  }
+  
+  .sidebar_dashboard_title_division:active{
+    color: var(--theme-color-blue);
+  }
+  

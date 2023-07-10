@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Button } from "react-bootstrap";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
-
 function LoginForm() {
   const {
     register,
@@ -42,7 +41,7 @@ function LoginForm() {
         if (data["status"] === "1") {
           console.log(data["Token"])
           localStorage.setItem("SToken", data["Token"]);
-          navigate("/profile_student")
+          navigate("/userprofile")
 
         } 
         else if (data["status"] === "0") {
