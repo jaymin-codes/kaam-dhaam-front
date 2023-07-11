@@ -7,7 +7,7 @@ import DetailsFormStu from "./DetailsFormStu";
 function DetailsStudent() {
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <DetailsFormStu />
     </div>
   );
