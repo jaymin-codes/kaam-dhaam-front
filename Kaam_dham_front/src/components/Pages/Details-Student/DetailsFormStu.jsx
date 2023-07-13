@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Multiselect from "multiselect-react-dropdown";
 import Button from "react-bootstrap/Button";
 import "./DetailsStudent.css";
+import { useNavigate } from "react-router-dom";
 
 function DetailsFormStu() {
   const [branch, setBranch] = useState();
@@ -17,6 +18,9 @@ function DetailsFormStu() {
     "C++",
     "SQL",
   ]);
+  const navigate = useNavigate();
+
+  const [finallist,setlist]=useState([]);
 
   const {
     register,
@@ -27,7 +31,50 @@ function DetailsFormStu() {
   const [studentDetails, setStudentDetails] = useState();
   const onSubmit = (data) => {
     setStudentDetails(data);
-    console.log(data);
+    console.log(data)
+    var Url=window.API_PREFIX+"user/registration"
+    fetch(Url, {
+      method: "POST",
+      headers:{
+          "Content-type": "application/json",
+
+      },
+      body: JSON.stringify({
+        Token:localStorage.getItem("SToken"),
+        DOB:data['stuDOB'],
+        Mobile:data['stuContactNum'],
+        College:data['stuCollege'],
+        City:data['stuCity'],
+        Branch:data['stuBranch'],
+        Bio:data['stuBio'],
+        Intrested:finallist
+
+        
+
+
+      }),
+  })
+  .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+        // Handle the data returned from the API
+        
+        if (data["status"] === "1") {
+            navigate("/profile_student")
+        } 
+        else if (data["status"] === "0") {
+          alert(data['message'])
+
+        } 
+        else {
+          alert(data['message'])
+        }
+        // You can do whatever you want with the data here
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error('Error:', error);
+    });
+
   };
 
 
@@ -54,7 +101,7 @@ function DetailsFormStu() {
 
       <div className="w-full md:flex md:justify-center">
         <form className="details-form-stu p-2 mb-4" action="" onSubmit={handleSubmit(onSubmit)}>
-          <div className="m-2 p-2">
+          {/* <div className="m-2 p-2">
             <label className="my-label" htmlFor="stuName">
               Name
             </label>
@@ -78,7 +125,7 @@ function DetailsFormStu() {
               placeholder="from api"
               name="stuEmail"
             />
-          </div>
+          </div> */}
 
           <div className="m-2 p-2">
             <label className="my-label" htmlFor="stuDOB">
@@ -165,12 +212,13 @@ function DetailsFormStu() {
               isObject={false}
               options={interest}
               onSelect={(event) => {
-                console.log(event);
+                setlist(event);
+
                 //inserts the selected option in array
                 //check console
               }}
               onRemove={(event) => {
-                console.log(event);
+                setlist(event);
                 //removes the selected opton in array
                 //check console
               }}

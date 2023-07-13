@@ -1,0 +1,69 @@
+:root {
+    --theme-main-color: #15558d;
+    --theme-color-green: #09e5ab;
+    --theme-color-pink: #ff4877;
+    --secondary-color: #fff;
+    --black-color:#000;
+    --doctor-booking-hover: #eeeeee;
+    --doctor-booking-border: #f0f0f0;
+    --doctor-booking-second-border: #dcddea;
+    --theme-color-blue: #20c0f3;
+    --theme-table-color: #888888;
+    --light-color-grey:#757575;
+    --slot-border-color:#e9e9e9;
+    --slot-active-color:#e8e8e8;
+    --table-btn-backgrnd-blue: #02b6b31f;
+    --table-btn-blue: #1db9aa;
+    --table-btn-backgrnd-green: rgba(15, 183, 107, 0.12);
+    --table-btn-green: #26af48;
+    --table-btn-backgrnd-red: rgba(242, 17, 54, 0.12);
+    --table-btn-red: #e63c3c;
+    --date-color:#e6e9f4;
+    --doc-patient-profile-btn: #f39c12;
+    --doc-patient-profile-bg-yellow: rgb(255 152 8 / 12%);
+    --doc-patient-profile-btn-font: #1db9aa;
+    --doc-patient-profile-bg-font: rgba(2, 182, 179, 0.12);
+    --doc-patient-profile-bg-blue: rgba(17, 148, 247, 0.12);
+    --doc-patient-profile-bg-green: rgba(2, 182, 179, 0.12);
+    --doc-login-page-color: #3d3d3d;
+    --doc-login-btn-hover: #09dca4;
+    --border-color: #c4c4c4;
+    --home-banner-title:#0071DC;
+    --home-paragraph-title:#3E5463;
+    --home-body-color:#272b41;
+    --botstarp-form:#bbb;
+    --home-background-banner:#E5F1FB;
+    --service-back:#edf5fc;
+    --feture-back:#f1f1f1;
+    --grid-news:#F9F9F9;
+    --about-back:#e5f1bf;
+    --contact-border:#c1c9d0;
+    --mobile-card-back:#F5F5F5;
+    --mobile-purpose-title:#d9d9d9;
+    --paybtn-back-mobile:#1DB9AA;
+    --pay-btn-font:#005E55;
+  
+  }
+  
+  :root {
+    --theme-title: 12px;
+    --theme-description: 14px;
+    --theme-font: 15px;
+    --theme-title-main: 16px;
+    --title-font: 18px;
+    --theme-title-font: 20px;
+    --main-title: 24px;
+    --main-title-time: 13px;
+    --title-small-font: 17px;
+    --title-large-font: 22px;
+    --main-title-large: 30px;
+    --main-primary-font: 48px;
+    --secondary-font: 40px;
+    --main-secondary-font: 28px;
+    --secondary-main: 36px;
+    --primary-font: 26px;
+    --primary-main-font: 38px;
+    --theme-primary-font: 44px;
+    --theme-second-font: 21px;
+    --card-date-font:10px;
+  }
