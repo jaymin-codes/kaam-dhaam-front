@@ -1,0 +1,15 @@
+input, textarea, select{
+    border: 2px solid;
+}
+
+.my-label{
+    @apply text-lg pr-2;
+}
+
+.my-input{
+    @apply p-1 w-full md:w-[500px];
+}
+
+.details-form-com{
+    border: 2px solid;
+}

@@ -3,7 +3,7 @@ input, textarea, select{
 }
 
 .my-label{
-    @apply text-lg pr-2;
+    @apply font-medium text-lg pr-2;
 }
 
 .my-input{
