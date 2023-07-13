@@ -10,6 +10,7 @@ import LoginPage from "../src/components/Pages/Login-Page/LoginPage";
 import ProfileStudent from "../src/components/Pages/Profile-Student/ProfileStudent";
 import OtpVerif from "../src/components/Pages/OTP-verification/otpVerif";
 import DetailsStudent from "./components/Pages/Details-Student/DetailsStudent";
+import DetailsCompany from "./components/Pages/Details-Company/DetailsCompany";
 
 window.API_PREFIX = 'http://localhost:8000/'
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile_student" element={<ProfileStudent />} />
           <Route path="/details_student" element={<DetailsStudent />} />
+          <Route path="/details_company" element={<DetailsCompany />} />
         </Routes>
       </div>
     </>
