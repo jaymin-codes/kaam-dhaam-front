@@ -13,16 +13,17 @@
           navigate("/");
         };
     return (
+      
       <Navbar expand="lg" className="navbar">
         <Container>
-          <div className='md:ml-[-80px]'>
+          <div>
           <Navbar.Brand onClick={brandNameClick} className="text-2xl font-medium" href="#home">Kaam-Dhaam</Navbar.Brand></div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto md:pt-[3px] font-medium text-black">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Notifications</Nav.Link>
-              <Nav.Link href="#link">Search</Nav.Link>
+              <Nav.Link href="/Home_Page">Home</Nav.Link>
+              <Nav.Link href="/Notification_Page">Notifications</Nav.Link>
+              <Nav.Link href="/Search_Page">Search</Nav.Link>
               <Nav.Link href="#link">About Us</Nav.Link>
               {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

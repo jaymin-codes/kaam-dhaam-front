@@ -11,6 +11,10 @@ import ProfileStudent from "../src/components/Pages/Profile-Student/ProfileStude
 import OtpVerif from "../src/components/Pages/OTP-verification/otpVerif";
 import DetailsStudent from "./components/Pages/Details-Student/DetailsStudent";
 import DetailsCompany from "./components/Pages/Details-Company/DetailsCompany";
+import HomePage from "./components/Pages/Homepage/HomePage";
+import NotificationPage from "./components/Pages/Notification-Page/NotificationPage";
+import SearchPage from "./components/Pages/Search-Page/SearchPage";
+
 window.API_PREFIX = 'http://localhost:8000/'
 function App() {
   return (
@@ -27,6 +31,9 @@ function App() {
 
           {/* new changes  */}
           <Route path="/registrationdataCompany" element={<DetailsCompany />} />
+          <Route path="/Home_Page" element={<HomePage />} />
+          <Route path="/Notification_Page" element={<NotificationPage />} />
+          <Route path="/Search_Page" element={<SearchPage />} />
         </Routes>
       </div>
     </>
