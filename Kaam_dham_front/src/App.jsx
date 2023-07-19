@@ -14,6 +14,7 @@ import DetailsCompany from "./components/Pages/Details-Company/DetailsCompany";
 import HomePage from "./components/Pages/Homepage/HomePage";
 import NotificationPage from "./components/Pages/Notification-Page/NotificationPage";
 import SearchPage from "./components/Pages/Search-Page/SearchPage";
+import Otp from "./components/Pages/Otp-company/Otp";
 
 window.API_PREFIX = 'http://localhost:8000/'
 function App() {
@@ -25,6 +26,9 @@ function App() {
           <Route path="/signUp_Student" element={<SignUpPage />} />
           <Route path="/signUp_Company" element={<SignUpPageCo />} />
           <Route path="/otp_verification" element={<OtpVerif />} />
+          <Route path="/otp_company" element={<Otp />} />
+
+          
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile_student" element={<ProfileStudent />} />
           <Route path="/registrationdata" element={<DetailsStudent />} />

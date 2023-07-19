@@ -1,0 +1,32 @@
+/* body{
+  color: rgb(62, 62, 62);
+
+} */
+.otp-main{
+    /* background-size: cover; */
+    /* backdrop-filter: blur(10px); */
+      background-image: linear-gradient(310deg,
+        hsl(199deg 82% 65%) 1%,
+        hsl(200deg 80% 61%) 44%,
+        hsl(202deg 77% 57%) 50%,
+        hsl(204deg 75% 53%) 51%,
+        hsl(206deg 72% 50%) 50%,
+        hsl(209deg 71% 48%) 49%,
+        hsl(214deg 65% 48%) 50%,
+        hsl(221deg 57% 48%) 56%,
+        hsl(231deg 48% 48%) 99%);
+  }
+  
+  .otp-inside{
+    border-radius: 50px;
+  background: #55bbec;
+  box-shadow:  10px 10px 10px #489fc9,
+               0px 0px 0px #62d7ff;
+  }
+  
+  .otp-input{
+    border : 2px solid;
+    border-radius: 25px;
+    height: 30px;
+    width: 150px;
+  }

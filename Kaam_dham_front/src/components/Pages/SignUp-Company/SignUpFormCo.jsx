@@ -8,9 +8,7 @@ import { useNavigate } from "react-router-dom";
 function SignUpFormCo() {
 
   const navigate = useNavigate();
-  const OtpButtonClick = () => {
-    navigate("/otp_verification");
-  };
+  
 
   const {
     register,
@@ -21,7 +19,35 @@ function SignUpFormCo() {
   const [companyInfo, setCompanyInfo] = useState();
   const onSubmit = (data) => {
     setCompanyInfo(data);
-    console.log(data);
+    var Url=window.API_PREFIX+"employer/issue_otp"
+    fetch(Url, {
+        method: "POST",
+        headers:{
+            "Content-type": "application/json",
+
+        },
+        body: JSON.stringify({
+          name:data,
+        }),
+    })
+    
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+        // Handle the data returned from the API
+        
+        if (data["status"] === "1") {
+          alert('Submitted')
+          navigate("/otp_company",{ state: { data: data } })
+
+        } else {
+          alert(data['message'])
+        }
+        // You can do whatever you want with the data here
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error('Error:', error);
+    });
   };
   // console.log(errors);
   return (
@@ -69,7 +95,7 @@ function SignUpFormCo() {
                   type="email"
                   placeholder="companyname@email.com"
                   name="companyemail"
-                  {...register("companyemail", { required: true })}
+                  {...register("email", { required: true })}
                 />
                 <p>{errors.companyemail && "Email is required."}</p>
               </div>
@@ -87,12 +113,12 @@ function SignUpFormCo() {
                   type="password"
                   placeholder="Password"
                   name="companypass"
-                  {...register("companypass", { required: true })}
+                  {...register("password", { required: true })}
                 />
                 <p>{errors.companypass && "Password is required."}</p>
               </div>
               <div className="flex items-center justify-center">
-                  <Button onClick={OtpButtonClick} className="mt-2 font-semibold bg-green-500 text-black">
+                  <Button type="" className="mt-2 font-semibold bg-green-500 text-black">
                     Submit
                   </Button>
               </div>
