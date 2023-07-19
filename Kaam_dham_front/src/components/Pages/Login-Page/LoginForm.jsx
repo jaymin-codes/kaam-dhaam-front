@@ -46,9 +46,17 @@ function LoginForm() {
           }
           else{
             navigate("/profile_student")
+          }          
+        } 
+        else if (data["status"] === "2") {
+          console.log(data["Token"])
+          localStorage.setItem("SToken", data["Token"]);
+          if (data["IsData"]===false){
+            navigate("/registrationdataCompany")
           }
-          
-
+          else{
+            navigate("/profile_student")
+          }          
         } 
         else if (data["status"] === "0") {
           alert(data['message'])

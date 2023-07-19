@@ -5,6 +5,8 @@ import Button from "react-bootstrap/esm/Button";
 import Multiselect from "multiselect-react-dropdown";
 import { useForm } from "react-hook-form";
 import "./DetailsCompany.css";
+import { useNavigate } from "react-router-dom";
+
 
 function DetailsFormCom() {
   const [interestedFields, setInterestedFields] = useState([
@@ -16,6 +18,7 @@ function DetailsFormCom() {
     "Electrical",
     "Medical",
   ]);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,6 +30,46 @@ function DetailsFormCom() {
 
   const onSubmit = (data) => {
     setCompanyDetails(data);
+    var Url=window.API_PREFIX+"employer/registration"
+    fetch(Url, {
+      method: "POST",
+      headers:{
+          "Content-type": "application/json",
+
+      },
+      body: JSON.stringify({
+        Token:localStorage.getItem("SToken"),
+        Description:data['companyDescription'],
+        Mobile:data['contactNumber'],
+        City:data['ownerName'],
+        Name:data['companyAddress']
+
+        
+
+
+      }),
+  })
+  .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+        // Handle the data returned from the API
+        
+        if (data["status"] === "1") {
+            navigate("/profile_student")
+        } 
+        else if (data["status"] === "0") {
+          alert(data['message'])
+
+        } 
+        else {
+          alert(data['message'])
+        }
+        // You can do whatever you want with the data here
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error('Error:', error);
+    });
+
   };
 
   return (
@@ -55,23 +98,9 @@ function DetailsFormCom() {
             action=""
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="m-2 p-2">
-              <label className="my-label" htmlFor="companyAddress">
-                Company Address
-              </label>
-              <br />
-              <textarea
-                className="my-input"
-                name=""
-                id=""
-                cols="60"
-                rows="4"
-                {...register("companyAddress", { required: true })}
-              ></textarea>
-              <p>{errors.companyAddress && "Company Address is required."}</p>
-            </div>
+            
 
-            <div className="m-2 p-2">
+            {/* <div className="m-2 p-2">
               <label className="my-label" htmlFor="companyType">
                 Company Type
               </label>
@@ -82,28 +111,22 @@ function DetailsFormCom() {
                 {...register("companyType", { required: true })}
               />
               <p>{errors.companyType && "Company Type is required."}</p>
-            </div>
+            </div> */}
 
+            
             <div className="m-2 p-2">
-              <label className="my-label" htmlFor="companyDescription">
-                Company Description
+              <label className="my-label" htmlFor="ownerName">
+                Owner Name
               </label>
               <br />
-              <textarea
+              <input
                 className="my-input"
-                name=""
-                id=""
-                cols="60"
-                rows="4"
-                {...register("companyDescription", { required: true })}
-              ></textarea>
-              <p>
-                {errors.companyDescription &&
-                  "Company Description is required."}
-              </p>
+                type="text"
+                {...register("ownerName", { required: true })}
+              />
+              <p>{errors.ownerName && "Owner Name is required."}</p>
             </div>
-
-            <div className="m-2 p-2">
+            {/* <div className="m-2 p-2">
               <label className="my-label" htmlFor="interestedFields">
                 Interested Fields(to hire from)
               </label>
@@ -125,7 +148,7 @@ function DetailsFormCom() {
                   //check console
                 }}
               />
-            </div>
+            </div> */}
 
             <div className="m-2 p-2">
               <label className="my-label" htmlFor="contactNumber">
@@ -152,17 +175,39 @@ function DetailsFormCom() {
               />
             </div>
 
+            
             <div className="m-2 p-2">
-              <label className="my-label" htmlFor="ownerName">
-                Owner Name
+              <label className="my-label" htmlFor="companyDescription">
+                Company Description
               </label>
               <br />
-              <input
+              <textarea
                 className="my-input"
-                type="text"
-                {...register("ownerName", { required: true })}
-              />
-              <p>{errors.ownerName && "Owner Name is required."}</p>
+                name=""
+                id=""
+                cols="60"
+                rows="4"
+                {...register("companyDescription", { required: true })}
+              ></textarea>
+              <p>
+                {errors.companyDescription &&
+                  "Company Description is required."}
+              </p>
+            </div>
+            <div className="m-2 p-2">
+              <label className="my-label" htmlFor="companyAddress">
+                Company Address
+              </label>
+              <br />
+              <textarea
+                className="my-input"
+                name=""
+                id=""
+                cols="60"
+                rows="4"
+                {...register("companyAddress", { required: true })}
+              ></textarea>
+              <p>{errors.companyAddress && "Company Address is required."}</p>
             </div>
 
             <div className="text-center">

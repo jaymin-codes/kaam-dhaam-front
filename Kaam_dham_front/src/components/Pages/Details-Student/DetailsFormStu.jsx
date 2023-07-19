@@ -31,7 +31,6 @@ function DetailsFormStu() {
   const [studentDetails, setStudentDetails] = useState();
   const onSubmit = (data) => {
     setStudentDetails(data);
-    console.log(data)
     var Url=window.API_PREFIX+"user/registration"
     fetch(Url, {
       method: "POST",
