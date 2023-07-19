@@ -45,7 +45,7 @@ function LoginForm() {
             navigate("/registrationdata")
           }
           else{
-            navigate("/profile_student")
+            navigate("/Home_Page")
           }          
         } 
         else if (data["status"] === "2") {
@@ -55,7 +55,7 @@ function LoginForm() {
             navigate("/registrationdataCompany")
           }
           else{
-            navigate("/profile_student")
+            navigate("/Home_Page")
           }          
         } 
         else if (data["status"] === "0") {

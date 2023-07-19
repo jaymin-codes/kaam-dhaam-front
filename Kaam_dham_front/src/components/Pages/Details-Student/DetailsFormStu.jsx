@@ -58,7 +58,7 @@ function DetailsFormStu() {
         // Handle the data returned from the API
         
         if (data["status"] === "1") {
-            navigate("/profile_student")
+            navigate("/Home_Page")
         } 
         else if (data["status"] === "0") {
           alert(data['message'])
