@@ -13,7 +13,7 @@ function NavBarInsideCmpny() {
     navigate("/HomePage_Company");
   };
   return (
-    <Navbar expand="lg" className="navbar">
+    <Navbar expand="lg" className="navbar" fixed="top">
       <Container>
         <div>
           <Navbar.Brand

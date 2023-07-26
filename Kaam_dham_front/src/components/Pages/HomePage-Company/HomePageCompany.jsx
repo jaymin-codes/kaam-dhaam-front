@@ -1,9 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import Multiselect from "multiselect-react-dropdown";
+// import Multiselect from "multiselect-react-dropdown";
 import { motion } from "framer-motion";
 import Button from "react-bootstrap/esm/Button";
 import { useForm } from "react-hook-form";
+// import Select from "react-select";
+import CreatableSelect from 'react-select/creatable';
 import NavBarInsideCmpny from "../../NavbarInsideCmpny/NavbarInsideCmpny";
 
 function HomePageCompany() {
@@ -13,29 +15,23 @@ function HomePageCompany() {
     formState: { errors },
   } = useForm();
 
+  const options = [
+    { value: "java", label: "Java" },
+    { value: "cpp", label: "CPP" },
+    { value: "django", label: "dJango" },
+    { value: "autocad", label: "AutoCad" },
+  ];
+
   const [postDetails, setPostDetails] = useState();
+  const [skills, setSkills] = useState(null);
+
+  const handleSelect = (selectedOptions) => {
+    setSkills(selectedOptions);
+    console.log(selectedOptions);
+  }
 
   const onSubmit = (data) => {
     setPostDetails(data);
-  };
-  const [skills, setSkills] = useState([
-    { id: 1, name: "Java" },
-    { id: 2, name: "ReactJS" },
-    { id: 3, name: "SQL" },
-    { id: 4, name: "Autocad" },
-    { id: 5, name: "dJango" },
-  ]);
-  const onInputChange = (inputValue) => {
-    // Check if the typed value exists in the options
-    const optionExists = skills.some(
-      (option) => option.name.toLowerCase() === inputValue.toLowerCase()
-    );
-
-    if (!optionExists && inputValue.trim() !== "") {
-      // Add the new option to the list of options
-      const newOption = { id: skills.length + 1, name: inputValue };
-      setSkills([...skills, newOption]);
-    }
   };
 
   return (
@@ -47,7 +43,7 @@ function HomePageCompany() {
       <div>
         <NavBarInsideCmpny />
 
-        <div className="flex flex-row container">
+        <div className="flex flex-row container mt-5">
           <div className="flex flex-col justify-center w-1/3 h-screen border border-black">
             previous posts from api
           </div>
@@ -101,7 +97,14 @@ function HomePageCompany() {
               <div className="p-2 m-2">
                 <label htmlFor="skillsReq">Skills Required</label>
                 <br />
-                <Multiselect
+                <CreatableSelect
+                defaultValue={skills}
+                onChange={handleSelect}
+                options={options}
+                isMulti={true}
+                isSearchable={true}
+                />
+                {/* <Multiselect
                   options={skills}
                   selectedValues={[]}
                   displayValue="name"
@@ -116,7 +119,7 @@ function HomePageCompany() {
                     console.log(event);
                     //removes the selected opton in array
                   }}
-                />
+                /> */}
               </div>
 
               <div className="p-2 m-2">
