@@ -5,12 +5,12 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import "./NavBarInside.css";
+import "./NavbarInsideCmpny.css";
 
-function NavBarInside() {
+function NavBarInsideCmpny() {
   const navigate = useNavigate();
   const brandNameClick = () => {
-    navigate("/Home_Page");
+    navigate("/HomePage_Company");
   };
   return (
     <Navbar expand="lg" className="navbar">
@@ -27,7 +27,7 @@ function NavBarInside() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto md:pt-[3px] font-medium text-black">
-            <Nav.Link href="/Home_Page">Home</Nav.Link>
+            <Nav.Link href="/HomePage_Company">Home</Nav.Link>
             <Nav.Link href="/Notification_Page">Notifications</Nav.Link>
             <Nav.Link href="/Search_Page">Search</Nav.Link>
             <Nav.Link href="#link">About Us</Nav.Link>
@@ -67,4 +67,4 @@ function NavBarInside() {
   );
 }
 
-export default NavBarInside;
+export default NavBarInsideCmpny;

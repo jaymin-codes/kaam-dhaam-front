@@ -15,6 +15,7 @@ import HomePage from "./components/Pages/Homepage/HomePage";
 import NotificationPage from "./components/Pages/Notification-Page/NotificationPage";
 import SearchPage from "./components/Pages/Search-Page/SearchPage";
 import Otp from "./components/Pages/Otp-company/Otp";
+import HomePageCompany from "./components/Pages/HomePage-Company/HomePageCompany";
 
 window.API_PREFIX = 'http://localhost:8000/'
 function App() {
@@ -38,6 +39,8 @@ function App() {
           <Route path="/Home_Page" element={<HomePage />} />
           <Route path="/Notification_Page" element={<NotificationPage />} />
           <Route path="/Search_Page" element={<SearchPage />} />
+
+          <Route path="/HomePage_Company" element={<HomePageCompany />} />
         </Routes>
       </div>
     </>
