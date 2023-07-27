@@ -33,7 +33,40 @@ function HomePageCompany() {
   const onSubmit = (data) => {
     setPostDetails(data);
     console.log(data)
-    console.log(selectedOptions)
+    console.log(skills)
+    var Url=window.API_PREFIX+"job/add_job"
+      fetch(Url, {
+        method: "POST",
+        headers:{
+            "Content-type": "application/json",
+
+        },
+        body: JSON.stringify({
+          Token:localStorage.getItem('SToken'),
+          Title:data['gigTitle'],
+          Description:data['gigDescription'],
+          Eligibilty:data['eligibiltyCrit'],
+          Duration:data['duration'],
+          Stipend:data['stipend'],
+          Skill:skills
+
+        }),
+    })
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+        // Handle the data returned from the API
+        if (data["status"] === "1") {
+          window.location.reload();
+
+        } else {
+          alert(data['message'])
+        }
+        // You can do whatever you want with the data here
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error('Error:', error);
+    });
   };
 
   return (
@@ -105,6 +138,7 @@ function HomePageCompany() {
                 options={options}
                 isMulti={true}
                 isSearchable={true}
+
                 />
                 {/* <Multiselect
                   options={skills}
@@ -160,7 +194,7 @@ function HomePageCompany() {
               </div>
 
               {/* Only for testing */}
-              <pre>{JSON.stringify(postDetails, undefined)}</pre>
+              {/* <pre>{JSON.stringify(postDetails, undefined)}</pre> */}
               {/* Only for testing */}
             </form>
           </div>
