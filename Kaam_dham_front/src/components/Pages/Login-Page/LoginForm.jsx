@@ -55,7 +55,7 @@ function LoginForm() {
             navigate("/registrationdataCompany")
           }
           else{
-            navigate("/Home_Page")
+            navigate("/HomePage_Company")
           }          
         } 
         else if (data["status"] === "0") {

@@ -32,6 +32,8 @@ function HomePageCompany() {
 
   const onSubmit = (data) => {
     setPostDetails(data);
+    console.log(data)
+    console.log(selectedOptions)
   };
 
   return (

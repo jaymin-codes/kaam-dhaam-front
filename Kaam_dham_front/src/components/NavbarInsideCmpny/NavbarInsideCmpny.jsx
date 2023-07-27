@@ -12,6 +12,10 @@ function NavBarInsideCmpny() {
   const brandNameClick = () => {
     navigate("/HomePage_Company");
   };
+  const handleLogout = () =>{
+    localStorage.clear();
+    navigate("/")
+  }
   return (
     <Navbar expand="lg" className="navbar" fixed="top">
       <Container>
@@ -53,7 +57,7 @@ function NavBarInsideCmpny() {
                   Edit Profile
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Log Out</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>Log Out</NavDropdown.Item>
                 <NavDropdown.Divider />
                 {/* <NavDropdown.Item href="#action/3.4">
                   Separated link
