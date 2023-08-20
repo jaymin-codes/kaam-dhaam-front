@@ -16,6 +16,9 @@ import NotificationPage from "./components/Pages/Notification-Page/NotificationP
 import SearchPage from "./components/Pages/Search-Page/SearchPage";
 import Otp from "./components/Pages/Otp-company/Otp";
 import HomePageCompany from "./components/Pages/HomePage-Company/HomePageCompany";
+import NotificationPageCompany from "./components/Pages/NotificationPage-Company/NotificationPageCompany";
+import SearchPageCompany from "./components/Pages/SearchPage-Company/SearchPageCompany";
+
 
 window.API_PREFIX = 'http://localhost:8000/'
 function App() {
@@ -41,6 +44,9 @@ function App() {
           <Route path="/Search_Page" element={<SearchPage />} />
 
           <Route path="/HomePage_Company" element={<HomePageCompany />} />
+          <Route path="/Notification_Company" element={<NotificationPageCompany />} />
+          <Route path="/SearchPage_Company" element={<SearchPageCompany />} />
+
         </Routes>
       </div>
     </>

@@ -6,7 +6,17 @@ import Button from "react-bootstrap/esm/Button";
 import { useForm } from "react-hook-form";
 // import Select from "react-select";
 import CreatableSelect from 'react-select/creatable';
+import CmpyBg from '../../../imgs/company_home_bg.png';
 import NavBarInsideCmpny from "../../NavbarInsideCmpny/NavbarInsideCmpny";
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    borderColor: 'black',
+    borderRadius: '0.5rem',
+    borderWidth : '2px' 
+  }),
+};
 
 function HomePageCompany() {
   const {
@@ -22,8 +32,13 @@ function HomePageCompany() {
     { value: "autocad", label: "AutoCad" },
   ];
 
+  // eslint-disable-next-line no-unused-vars
   const [postDetails, setPostDetails] = useState();
   const [skills, setSkills] = useState(null);
+
+  //duration add kri deje submit action ma
+  const [selectedDuration, setSelectedDuration] = useState();
+  const [selectedDurationType, setSelectedDurationType] = useState();
 
   const handleSelect = (selectedOptions) => {
     setSkills(selectedOptions);
@@ -46,7 +61,7 @@ function HomePageCompany() {
           Title:data['gigTitle'],
           Description:data['gigDescription'],
           Eligibilty:data['eligibiltyCrit'],
-          Duration:data['duration'],
+          Duration:data['duration'], // aaiya duration na 2 state variable naaki deje
           Stipend:data['stipend'],
           Skill:skills
 
@@ -79,19 +94,28 @@ function HomePageCompany() {
         <NavBarInsideCmpny />
 
         <div className="flex flex-row container mt-5">
-          <div className="flex flex-col justify-center w-1/3 h-screen border border-black">
+          <div className="flex flex-col justify-center w-1/3 h-screen">
             previous posts from api
           </div>
 
-          <div className="flex items-center justify-center w-2/3 border border-black">
+          <div 
+          className="flex items-center justify-center w-2/3 py-5"
+          style={{
+            backgroundImage :`url(${CmpyBg})`,
+            backgroundColor: 'rgba(255, 255, 255, 0.4)',
+            // backdropFilter: 'blur(10px)', 
+            backgroundSize: 'cover',
+          }}
+          
+          >
             <form action="" onSubmit={handleSubmit(onSubmit)}>
               <div className="p-2 m-2">
-                <label htmlFor="gigTitle">Gig Title</label>
+                <label className=" font-semibold text-lg" htmlFor="gigTitle">Gig Title</label>
                 <br />
                 <input
                   type="text"
                   name="gigTitle"
-                  className="w-[400px]"
+                  className="p-2 w-[450px] h-[35px] border-1 rounded-lg"
                   {...register("gigTitle", { required: true })}
                 />
                 <p className="text-red-500">
@@ -100,13 +124,14 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label htmlFor="gigDescription">Description</label>
+                <label className=" font-semibold text-lg" htmlFor="gigDescription">Description</label>
                 <br />
                 <textarea
                   name="gigDescription"
                   id=""
-                  cols="50"
+                  cols="60"
                   rows="3"
+                  className="p-2 border-1 rounded-lg"
                   {...register("gigDescription", { required: true })}
                 ></textarea>
                 <p className="text-red-500">
@@ -115,13 +140,14 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label htmlFor="eligibiltyCrit">Eligibilty Criteria</label>
+                <label className=" font-semibold text-lg" htmlFor="eligibiltyCrit">Eligibilty Criteria</label>
                 <br />
                 <textarea
                   name="eligibiltyCrit"
                   id=""
-                  cols="50"
+                  cols="60"
                   rows="3"
+                  className="p-2 border-1 rounded-lg"
                   {...register("eligibiltyCrit", { required: true })}
                 ></textarea>
                 <p className="text-red-500">
@@ -130,7 +156,7 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label htmlFor="skillsReq">Skills Required</label>
+                <label className=" font-semibold text-lg" htmlFor="skillsReq">Skills Required</label>
                 <br />
                 <CreatableSelect
                 defaultValue={skills}
@@ -138,7 +164,8 @@ function HomePageCompany() {
                 options={options}
                 isMulti={true}
                 isSearchable={true}
-
+                styles={customStyles}
+                className="border-1 rounded-lg"
                 />
                 {/* <Multiselect
                   options={skills}
@@ -159,24 +186,45 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label htmlFor="duration">Duration</label>
+                <label className=" font-semibold text-lg" htmlFor="duration">Duration</label>
                 <br />
                 <input
-                  type="text"
+                  className="mr-2 w-[80px] h-[30px] text-center border-1 rounded-lg"
+                  type="number"
+                  id="duration"
                   name="duration"
+                  min="1"    
+                  step="1"   
+                  value={selectedDuration}  
+                  onChange={(event) => setSelectedDuration(event.target.value)}
                   {...register("duration", { required: true })}
-                />
+                 />
+                <select
+                  className=" rounded-lg"
+                  id="durationType"
+                  name="durationType"
+                  value={selectedDurationType} 
+                  onChange={(event) => setSelectedDurationType(event.target.value)}
+                  {...register("durationType", { required: true })}
+                >
+                  <option value="weeks">Weeks</option>
+                  <option value="months">Months</option>
+                </select>
                 <p className="text-red-500">
                   {errors.duration && "Duration is required."}
                 </p>
               </div>
 
               <div className="p-2 m-2">
-                <label htmlFor="stipend">Stipend</label>
+                <label className=" font-semibold text-lg" htmlFor="stipend">Stipend</label>
                 <br />
+                <span className="mr-1 font-medium text-xl">₹</span>
                 <input
-                  type="text"
+                  type="number"
                   name="stipend"
+                  className="p-2 ml-1 border-1 rounded-lg"
+                  min="0"
+                  step="500"
                   {...register("stipend", { required: true })}
                 />
                 <p className="text-red-500">
@@ -187,7 +235,7 @@ function HomePageCompany() {
               <div className="flex justify-center pt-4">
                 <Button
                   type="submit"
-                  className="bg-blue-500 text-xl font-semibold w-[90px] h-[35px] flex items-center justify-center"
+                  className="bg-blue-500 text-2xl font-semibold w-[130px] h-[50px] flex items-center justify-center"
                 >
                   Post
                 </Button>
@@ -201,7 +249,7 @@ function HomePageCompany() {
         </div>
       </div>
     </motion.div>
-    //make new navbar for comapny side
+    //make new navbar for comapny side  
   );
 }
 
