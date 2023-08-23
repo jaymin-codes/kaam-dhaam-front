@@ -256,18 +256,7 @@ function HomePage() {
                 Apply
               </Button>
             </motion.div>
-          </div>
-
-          <div className="w-1/5">
-            <div className="h-full flex items-center justify-center">hello</div>
-          </div>
-        </div>
-<<<<<<< HEAD
-=======
-
-        <div className="w-3/5 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 4rem - 4px)' }}>
-          {/* posts will come here */}
-          {data.map(item => (
+            {data.map(item => (
             <React.Fragment key={item.id}>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}transition={{ duration: 0.5 }} className="w-full p-2 mt-2">
             <h1 className="mb-1">{item.Title}</h1>
@@ -288,30 +277,30 @@ function HomePage() {
           <hr />
           </React.Fragment>
           ))}
-          {/* <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}transition={{ duration: 0.5 }} className="w-full p-2 mt-2">
-            <h1 className="mb-1">Company Name</h1>
-            <h1 className="mb-1">Role Name</h1>
-            <p className="mb-1">Role details Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minus, voluptas consequuntur ipsam atque similique cum animi adipisci amet cupiditate.</p>
-            <h1 className="mb-1">Eligibility</h1>
-            <p className="mb-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic, minus?</p>
-            <Button className="bg-green-500 text-lg w-[100px] h-[35px] flex items-center justify-center">Apply</Button>
-          </motion.div>
+          </div>
+          
+        
 
-          <hr /> */}
+          <div className="w-1/5">
+            <div className="h-full flex items-center justify-center">hello</div>
+          </div>
+        </div>
+        </div>
+    </motion.div>
+  );
+}
+
+
+        
+         
 
           
 
           
   
-        </div>
 
-        <div className="w-1/5">
-          <div className="h-full flex items-center justify-center">hello</div>
-        </div>
->>>>>>> f778dd6 (homepage)
-      </div>
-    </motion.div>
-  );
-}
+        
+
+      
 
 export default HomePage;
