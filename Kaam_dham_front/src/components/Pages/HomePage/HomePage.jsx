@@ -259,6 +259,8 @@ function HomePage() {
             {data.map(item => (
             <React.Fragment key={item.id}>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}transition={{ duration: 0.5 }} className="w-full p-2 mt-2">
+            <h1 className="mb-1">{item.CompanyName}</h1>
+            
             <h1 className="mb-1">{item.Title}</h1>
             <h1 className="mb-1">{item.Description}</h1>
             <p className="mb-1">{item.Eligibilty}</p>
