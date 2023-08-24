@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 // import Multiselect from "multiselect-react-dropdown";
 import { motion } from "framer-motion";
 import Button from "react-bootstrap/esm/Button";
@@ -39,7 +39,32 @@ function HomePageCompany() {
   //duration add kri deje submit action ma
   const [selectedDuration, setSelectedDuration] = useState();
   const [selectedDurationType, setSelectedDurationType] = useState();
-
+  const [data, setData] = useState([]);
+  const [id,setid]=useState('');
+  useEffect(() => {
+    var Url=window.API_PREFIX+"employer/show_job"
+        fetch(Url, {
+          method: "POST",
+          headers:{
+              "Content-type": "application/json",
+  
+          },
+          body: JSON.stringify({
+            Token:localStorage.getItem('SToken')
+          }),
+      })
+      .then(response => response.json()) // Parse the response as JSON
+      .then(data => {
+          // Handle the data returned from the API
+          if (data["status"] === "1") {
+            setData([...data["job"]])
+            console.log(data['job'])
+          } else {
+            alert(data['message'])
+          }
+          // You can do whatever you want with the data here
+      })
+  }, []);
   const handleSelect = (selectedOptions) => {
     setSkills(selectedOptions);
     console.log(selectedOptions);
@@ -95,7 +120,29 @@ function HomePageCompany() {
 
         <div className="flex flex-row container mt-5">
           <div className="flex flex-col justify-center w-1/3 h-screen">
-            previous posts from api
+          {data.map(item => (
+            <React.Fragment key={item.id}>
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}transition={{ duration: 0.5 }} className="w-full p-2 mt-2">
+            <h1 className="mb-1">{item.CompanyName}</h1>
+            
+            <h1 className="mb-1">{item.Title}</h1>
+            <h1 className="mb-1">{item.Description}</h1>
+            <p className="mb-1">{item.Eligibilty}</p>
+            <h1 className="mb-1">{item.Skills}</h1>
+            <p className="mb-1">{item.Duration}</p>
+            <p className="mb-1">{item.Budget}</p>
+
+
+            <Button className="bg-green-500 text-lg w-[100px] h-[35px] flex items-center justify-center" onClick={() => {
+                                
+              setid(item.id);
+              console.log(item.id)
+              }}>View Bid</Button>
+          </motion.div>
+
+          <hr />
+          </React.Fragment>
+          ))}
           </div>
 
           <div 
