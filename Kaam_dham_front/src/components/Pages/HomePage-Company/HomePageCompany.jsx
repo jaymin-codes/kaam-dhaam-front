@@ -119,7 +119,8 @@ function HomePageCompany() {
         <NavBarInsideCmpny />
 
         <div className="flex flex-row container mt-5">
-          <div className="flex flex-col justify-center w-1/3 h-screen">
+          <div className="w-3/5 overflow-y-auto"
+            style={{ maxHeight: "calc(100vh - 4rem - 4px)" }}>
           {data.map(item => (
             <React.Fragment key={item.id}>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}transition={{ duration: 0.5 }} className="w-full p-2 mt-2">
