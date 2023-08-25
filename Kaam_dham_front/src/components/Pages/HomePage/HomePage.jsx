@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Select from "react-select";
 import ApplyPopup from "./ApplyPopup";
 
+
 const gigArea = [
   { value: "computer", label: "Computer Engg" },
   { value: "electircal", label: "Electrical Engg" },
@@ -20,7 +21,7 @@ function HomePage() {
   // eslint-disable-next-line no-unused-vars
   const [id, setid] = useState("");
 
-  // popup section 
+  // popup section
   const [showPopup, setShowPopup] = useState(false);
   const handleOpenPopup = () => {
     setShowPopup(true);
@@ -28,7 +29,6 @@ function HomePage() {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
-
 
   useEffect(() => {
     var Url = window.API_PREFIX + "job/show_job";
@@ -64,34 +64,39 @@ function HomePage() {
         <NavBarInside />
 
         <div className="flex flex-row p-2">
-          <div className="w-1/5">
-            <div className="h-full flex flex-col p-2">
-              <h1>Filters</h1>
-              <div>
-                <label htmlFor="hourly">
-                  <input type="checkbox" />
-                  Hourly
-                </label>
-                <br />
-                <label htmlFor="Weekly">
-                  <input type="checkbox" />
-                  Weekly
-                </label>
-              </div>
-              <div className="w-full">
-                {/* put an input field of area in company post form which will be dividing all gigs in different categories */}
-                <h1>Gig Area</h1>
-                <div>
-                  <Select options={gigArea} />
+
+          <div className="flex flex-row p-2 bg-gray-100 w-1/5">
+            <div className="w-full bg-white rounded shadow-md p-4">
+              <div className="h-full flex flex-col">
+                <h1 className="text-xl font-semibold mb-4">Filters</h1>
+                <div className="mb-4">
+                <h1 className="text-md mb-2">Time Duration</h1>
+                <div className="mb-2">
+                  <label className="inline-flex items-center">
+                    <input type="radio" name="time" className="form-radio" />
+                    <span className="ml-2">Weekly</span>
+                  </label>
+                </div>
+                <div className="mb-4">
+                  <label className="inline-flex items-center">
+                    <input type="radio" name="time" className="form-radio" />
+                    <span className="ml-2">Monthly</span>
+                  </label>
+                </div>
+                </div>
+                
+                <div className="w-full">
+                  <h1 className="text-md mb-2">Gig Area</h1>
+                  <div>
+                    <Select options={gigArea} />
+                  </div>
                 </div>
               </div>
-              <div></div>
             </div>
+            {/* Rest of your content */}
           </div>
 
-
-
-{/* post area */}
+          {/* post area */}
           <div
             className="w-3/5 overflow-y-auto"
             style={{ maxHeight: "calc(100vh - 4rem - 4px)" }}
@@ -105,26 +110,50 @@ function HomePage() {
                   transition={{ duration: 0.5 }}
                   className="w-full p-2 mt-2"
                 >
-                  <h1 className="mb-1">{item.CompanyName}</h1>
+                  <div className="p-2 bg-white rounded shadow-md">
+                    <h1 className="text-xl font-semibold mb-2">
+                      {item.CompanyName}
+                    </h1>
+                    <h2 className="text-lg font-medium mb-1">{item.Title}</h2>
+                    <p className="text-gray-600 mb-2">{item.Description}</p>
+                    <p className="mb-1">
+                      <span className="text-gray-800 font-semibold">
+                        Eligibility :
+                      </span>{" "}
+                      {item.Eligibilty}
+                    </p>
+                    <p className="mb-1">
+                      <span className="text-gray-800 font-semibold">
+                        Skills :
+                      </span>{" "}
+                      {item.Skills}
+                    </p>
+                    <p className="mb-1">
+                      <span className="text-gray-800 font-semibold">
+                        Duration :
+                      </span>{" "}
+                      {item.Duration}
+                    </p>
+                    <p className="font-semibold">
+                      Stipend :{" "}
+                      <span className="text-green-600">{item.Budget}</span>
+                    </p>
 
-                  <h1 className="mb-1">{item.Title}</h1>
-                  <h1 className="mb-1">{item.Description}</h1>
-                  <p className="mb-1">{item.Eligibilty}</p>
-                  <h1 className="mb-1">{item.Skills}</h1>
-                  <p className="mb-1">{item.Duration}</p>
-                  <p className="mb-1">{item.Budget}</p>
-
-                  <Button
-                    className="bg-green-500 text-lg w-[100px] h-[35px] flex items-center justify-center"
-                    onClick={() => {
-                      setid(item.id);
-                      handleOpenPopup();
-                      console.log(item.id);
-                    }}
-                  >
-                    Apply
-                  </Button>
-                  <ApplyPopup show={showPopup} handleClose={handleClosePopup} />
+                    <Button
+                      className="bg-green-500 mt-2 text-lg w-[100px] h-[35px] flex items-center justify-center"
+                      onClick={() => {
+                        setid(item.id);
+                        handleOpenPopup();
+                        console.log(item.id);
+                      }}
+                    >
+                      Apply
+                    </Button>
+                    <ApplyPopup
+                      show={showPopup}
+                      handleClose={handleClosePopup}
+                    />
+                  </div>
                 </motion.div>
 
                 <hr />
@@ -133,7 +162,7 @@ function HomePage() {
           </div>
 
           <div className="w-1/5">
-            <div className="h-full flex items-center justify-center">hello</div>
+            <div className="h-full flex items-center justify-center"></div>
           </div>
         </div>
       </div>

@@ -1,20 +1,21 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // import Multiselect from "multiselect-react-dropdown";
 import { motion } from "framer-motion";
 import Button from "react-bootstrap/esm/Button";
 import { useForm } from "react-hook-form";
-// import Select from "react-select";
-import CreatableSelect from 'react-select/creatable';
-import CmpyBg from '../../../imgs/company_home_bg.png';
+import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
+import CmpyBg from "../../../imgs/company_home_bg.png";
 import NavBarInsideCmpny from "../../NavbarInsideCmpny/NavbarInsideCmpny";
+
 
 const customStyles = {
   control: (provided) => ({
     ...provided,
-    borderColor: 'black',
-    borderRadius: '0.5rem',
-    borderWidth : '2px' 
+    borderColor: "black",
+    borderRadius: "0.5rem",
+    borderWidth: "2px",
   }),
 };
 
@@ -24,6 +25,15 @@ function HomePageCompany() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const gigArea = [
+    { value: "computer", label: "Computer Engg" },
+    { value: "electircal", label: "Electrical Engg" },
+    { value: "civil", label: "Civil Engg" },
+    { value: "mechanical", label: "Mechanical Engg" },
+    { value: "medical", label: "Medical" },
+    { value: "administrative", label: "Administrative" },
+  ];
 
   const options = [
     { value: "java", label: "Java" },
@@ -36,78 +46,83 @@ function HomePageCompany() {
   const [postDetails, setPostDetails] = useState();
   const [skills, setSkills] = useState(null);
 
+  const [selectedArea, setSelectedArea] = useState(null);
+  const handleGigArea = (e) => {
+    setSelectedArea(e);
+    console.log(e);
+  };
+
   //duration add kri deje submit action ma
   const [selectedDuration, setSelectedDuration] = useState();
   const [selectedDurationType, setSelectedDurationType] = useState();
   const [data, setData] = useState([]);
+
   // eslint-disable-next-line no-unused-vars
-  const [id,setid]=useState('');
+  const [id, setid] = useState("");
   useEffect(() => {
-    var Url=window.API_PREFIX+"employer/show_job"
-        fetch(Url, {
-          method: "POST",
-          headers:{
-              "Content-type": "application/json",
-  
-          },
-          body: JSON.stringify({
-            Token:localStorage.getItem('SToken')
-          }),
-      })
-      .then(response => response.json()) // Parse the response as JSON
-      .then(data => {
-          // Handle the data returned from the API
-          if (data["status"] === "1") {
-            setData([...data["job"]])
-            console.log(data['job'])
-          } else {
-            alert(data['message'])
-          }
-          // You can do whatever you want with the data here
-      })
+    var Url = window.API_PREFIX + "employer/show_job";
+    fetch(Url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        Token: localStorage.getItem("SToken"),
+      }),
+    })
+      .then((response) => response.json()) // Parse the response as JSON
+      .then((data) => {
+        // Handle the data returned from the API
+        if (data["status"] === "1") {
+          setData([...data["job"]]);
+          console.log(data["job"]);
+        } else {
+          alert(data["message"]);
+        }
+        // You can do whatever you want with the data here
+      });
   }, []);
+
   const handleSelect = (selectedOptions) => {
     setSkills(selectedOptions);
     console.log(selectedOptions);
-  }
+  };
 
   const onSubmit = (data) => {
     setPostDetails(data);
-    console.log(data)
-    console.log(skills)
-    var Url=window.API_PREFIX+"job/add_job"
-      fetch(Url, {
-        method: "POST",
-        headers:{
-            "Content-type": "application/json",
-
-        },
-        body: JSON.stringify({
-          Token:localStorage.getItem('SToken'),
-          Title:data['gigTitle'],
-          Description:data['gigDescription'],
-          Eligibilty:data['eligibiltyCrit'],
-          Duration:data['duration'], // aaiya duration na 2 state variable naaki deje
-          Stipend:data['stipend'],
-          Skill:skills
-
-        }),
+    console.log(data);
+    console.log(skills);
+    var Url = window.API_PREFIX + "job/add_job";
+    fetch(Url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        Token: localStorage.getItem("SToken"),
+        Title: data["gigTitle"],
+        Description: data["gigDescription"],
+        GigArea: data[selectedArea],
+        Eligibilty: data["eligibiltyCrit"],
+        Duration: data["duration"], // aaiya duration na 2 state variable naaki deje
+        Stipend: data["stipend"],
+        Skill: skills,
+      }),
     })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => {
+      .then((response) => response.json()) // Parse the response as JSON
+      .then((data) => {
         // Handle the data returned from the API
         if (data["status"] === "1") {
           window.location.reload();
-
         } else {
-          alert(data['message'])
+          alert(data["message"]);
         }
         // You can do whatever you want with the data here
-    })
-    .catch(error => {
+      })
+      .catch((error) => {
         // Handle any errors that occurred during the request
-        console.error('Error:', error);
-    });
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -120,46 +135,78 @@ function HomePageCompany() {
         <NavBarInsideCmpny />
 
         <div className="flex flex-row container mt-5">
-          <div className="w-3/5 overflow-y-auto"
-            style={{ maxHeight: "calc(100vh - 4rem - 4px)" }}>
-          {data.map(item => (
-            <React.Fragment key={item.id}>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}transition={{ duration: 0.5 }} className="w-full p-2 mt-2">
-            <h1 className="mb-1">{item.CompanyName}</h1>
-            
-            <h1 className="mb-1">{item.Title}</h1>
-            <h1 className="mb-1">{item.Description}</h1>
-            <p className="mb-1">{item.Eligibilty}</p>
-            <h1 className="mb-1">{item.Skills}</h1>
-            <p className="mb-1">{item.Duration}</p>
-            <p className="mb-1">{item.Budget}</p>
+          <div
+            className="w-2/5 overflow-y-auto"
+            style={{ maxHeight: "calc(100vh - 4rem - 4px)" }}
+          >
+            {data.map((item) => (
+              <React.Fragment key={item.id}>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full p-2 mt-2"
+                >
+                  <div className="p-2 bg-white rounded shadow-md">
+                    <h1 className="text-xl font-semibold mb-2">
+                      {item.CompanyName}
+                    </h1>
+                    <h2 className="text-lg font-medium mb-1">{item.Title}</h2>
+                    <p className="text-gray-600 mb-2">{item.Description}</p>
+                    <p className="mb-1">
+                      <span className="text-gray-800 font-semibold">
+                        Eligibility :
+                      </span>{" "}
+                      {item.Eligibilty}
+                    </p>
+                    <p className="mb-1">
+                      <span className="text-gray-800 font-semibold">
+                        Skills :
+                      </span>{" "}
+                      {item.Skills}
+                    </p>
+                    <p className="mb-1">
+                      <span className="text-gray-800 font-semibold">
+                        Duration :
+                      </span>{" "}
+                      {item.Duration}
+                    </p>
+                    <p className="font-semibold">
+                      Stipend :{" "}
+                      <span className="text-green-600">{item.Budget}</span>
+                    </p>
 
+                    <Button
+                      className="bg-green-500 text-lg mt-3 w-[130px] h-[35px] flex items-center justify-center"
+                      onClick={() => {
+                        setid(item.id);
+                        console.log(item.id);
+                      }}
+                    >
+                      View Bid
+                    </Button>
+                  </div>
+                </motion.div>
 
-            <Button className="bg-green-500 text-lg w-[100px] h-[35px] flex items-center justify-center" onClick={() => {
-                                
-              setid(item.id);
-              console.log(item.id)
-              }}>View Bid</Button>
-          </motion.div>
-
-          <hr />
-          </React.Fragment>
-          ))}
+                <hr />
+              </React.Fragment>
+            ))}
           </div>
 
-          <div 
-          className="flex items-center justify-center w-2/3 py-5"
-          style={{
-            backgroundImage :`url(${CmpyBg})`,
-            backgroundColor: 'rgba(255, 255, 255, 0.4)',
-            // backdropFilter: 'blur(10px)', 
-            backgroundSize: 'cover',
-          }}
-          
+          <div
+            className="flex items-center justify-center w-3/5 py-5"
+            style={{
+              backgroundImage: `url(${CmpyBg})`,
+              backgroundColor: "rgba(255, 255, 255, 0.4)",
+              // backdropFilter: 'blur(10px)',
+              backgroundSize: "cover",
+            }}
           >
             <form action="" onSubmit={handleSubmit(onSubmit)}>
               <div className="p-2 m-2">
-                <label className=" font-semibold text-lg" htmlFor="gigTitle">Gig Title</label>
+                <label className=" font-semibold text-lg" htmlFor="gigTitle">
+                  Gig Title
+                </label>
                 <br />
                 <input
                   type="text"
@@ -173,7 +220,12 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label className=" font-semibold text-lg" htmlFor="gigDescription">Description</label>
+                <label
+                  className=" font-semibold text-lg"
+                  htmlFor="gigDescription"
+                >
+                  Description
+                </label>
                 <br />
                 <textarea
                   name="gigDescription"
@@ -189,7 +241,24 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label className=" font-semibold text-lg" htmlFor="eligibiltyCrit">Eligibilty Criteria</label>
+                <label className=" font-semibold text-lg" htmlFor="gigArea">
+                  Gig Area
+                </label>
+                <br />
+                <Select
+                  styles={customStyles}
+                  options={gigArea}
+                  onChange={handleGigArea}
+                />
+              </div>
+
+              <div className="p-2 m-2">
+                <label
+                  className=" font-semibold text-lg"
+                  htmlFor="eligibiltyCrit"
+                >
+                  Eligibilty Criteria
+                </label>
                 <br />
                 <textarea
                   name="eligibiltyCrit"
@@ -205,16 +274,18 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label className=" font-semibold text-lg" htmlFor="skillsReq">Skills Required</label>
+                <label className=" font-semibold text-lg" htmlFor="skillsReq">
+                  Skills Required
+                </label>
                 <br />
                 <CreatableSelect
-                defaultValue={skills}
-                onChange={handleSelect}
-                options={options}
-                isMulti={true}
-                isSearchable={true}
-                styles={customStyles}
-                className="border-1 rounded-lg"
+                  defaultValue={skills}
+                  onChange={handleSelect}
+                  options={options}
+                  isMulti={true}
+                  isSearchable={true}
+                  styles={customStyles}
+                  className="border-1 rounded-lg"
                 />
                 {/* <Multiselect
                   options={skills}
@@ -235,25 +306,29 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label className=" font-semibold text-lg" htmlFor="duration">Duration</label>
+                <label className=" font-semibold text-lg" htmlFor="duration">
+                  Duration
+                </label>
                 <br />
                 <input
                   className="mr-2 w-[80px] h-[30px] text-center border-1 rounded-lg"
                   type="number"
                   id="duration"
                   name="duration"
-                  min="1"    
-                  step="1"   
-                  value={selectedDuration}  
+                  min="1"
+                  step="1"
+                  value={selectedDuration}
                   onChange={(event) => setSelectedDuration(event.target.value)}
                   {...register("duration", { required: true })}
-                 />
+                />
                 <select
                   className=" rounded-lg"
                   id="durationType"
                   name="durationType"
-                  value={selectedDurationType} 
-                  onChange={(event) => setSelectedDurationType(event.target.value)}
+                  value={selectedDurationType}
+                  onChange={(event) =>
+                    setSelectedDurationType(event.target.value)
+                  }
                   {...register("durationType", { required: true })}
                 >
                   <option value="weeks">Weeks</option>
@@ -265,7 +340,9 @@ function HomePageCompany() {
               </div>
 
               <div className="p-2 m-2">
-                <label className=" font-semibold text-lg" htmlFor="stipend">Stipend</label>
+                <label className=" font-semibold text-lg" htmlFor="stipend">
+                  Stipend
+                </label>
                 <br />
                 <span className="mr-1 font-medium text-xl">₹</span>
                 <input
@@ -298,7 +375,7 @@ function HomePageCompany() {
         </div>
       </div>
     </motion.div>
-    //make new navbar for comapny side  
+    //make new navbar for comapny side
   );
 }
 

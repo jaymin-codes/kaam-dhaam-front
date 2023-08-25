@@ -15,7 +15,14 @@ function ApplyPopup({ show, handleClose }) {
   const handleBidSubmit = () => {
     const submittedBidAmount = bidAmount;
     console.log(submittedBidAmount);
-    toast.success("Good luck with your bid!");
+    
+    if (submittedBidAmount > 0) {
+      toast.success("Good luck with your bid!");
+    }
+    else{
+      toast.error("Please enter bid!")
+    }
+    
     setBidAmount("");
     handleClose();
   };
