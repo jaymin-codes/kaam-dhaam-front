@@ -40,6 +40,7 @@ function HomePageCompany() {
   const [selectedDuration, setSelectedDuration] = useState();
   const [selectedDurationType, setSelectedDurationType] = useState();
   const [data, setData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [id,setid]=useState('');
   useEffect(() => {
     var Url=window.API_PREFIX+"employer/show_job"
