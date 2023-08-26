@@ -8,16 +8,34 @@ import ApplyPopup from "./ApplyPopup";
 
 
 const gigArea = [
-  { value: "computer", label: "Computer Engg" },
-  { value: "electircal", label: "Electrical Engg" },
-  { value: "civil", label: "Civil Engg" },
-  { value: "mechanical", label: "Mechanical Engg" },
-  { value: "medical", label: "Medical" },
-  { value: "administrative", label: "Administrative" },
+  { value: "Computer Engg", label: "Computer Engg" },
+  { value: "Electrical Engg", label: "Electrical Engg" },
+  { value: "Civil Engg", label: "Civil Engg" },
+  { value: "Mechanical Engg", label: "Mechanical Engg" },
+  { value: "Medical", label: "Medical" },
+  { value: "Administrative", label: "Administrative" },
 ];
 
 function HomePage() {
+  const [selectedArea, setSelectedArea] = useState(null);
   const [data, setData] = useState([]);
+
+  const handleOnChange = (event) => {
+    console.log(event['value'])
+    // setRecords(data.filter(f =>f.Tag.includes(event['value'])));
+
+    var temp=data.filter(f =>f.Tag.includes(event['value']));
+
+    console.log(temp)
+    setRecords([...temp])
+    // this.functionB(event);
+  };
+  const handleGigArea = (event) => {
+    setSelectedArea(event);
+    console.log(event);
+  };
+  const [records,setRecords]=useState([]);
+
   // eslint-disable-next-line no-unused-vars
   const [id, setid] = useState("");
 
@@ -46,6 +64,8 @@ function HomePage() {
         // Handle the data returned from the API
         if (data["status"] === "1") {
           setData([...data["job"]]);
+          setRecords([...data['job']])
+
           console.log(data["job"]);
         } else {
           alert(data["message"]);
@@ -53,6 +73,9 @@ function HomePage() {
         // You can do whatever you want with the data here
       });
   }, []);
+  // const Filter = (event) =>{data.filter(f =>f.)
+
+  // }
 
   return (
     <motion.div
@@ -73,13 +96,13 @@ function HomePage() {
                 <h1 className="text-md mb-2">Time Duration</h1>
                 <div className="mb-2">
                   <label className="inline-flex items-center">
-                    <input type="radio" name="time" className="form-radio" />
+                    <input type="checkbox" name="weeks" className="form-radio" />
                     <span className="ml-2">Weekly</span>
                   </label>
                 </div>
                 <div className="mb-4">
                   <label className="inline-flex items-center">
-                    <input type="radio" name="time" className="form-radio" />
+                    <input type="checkbox" name="Months" className="form-radio" />
                     <span className="ml-2">Monthly</span>
                   </label>
                 </div>
@@ -88,7 +111,7 @@ function HomePage() {
                 <div className="w-full">
                   <h1 className="text-md mb-2">Gig Area</h1>
                   <div>
-                    <Select options={gigArea} />
+                    <Select options={gigArea} onChange={handleOnChange}/>
                   </div>
                 </div>
               </div>
@@ -102,7 +125,7 @@ function HomePage() {
             style={{ maxHeight: "calc(100vh - 4rem - 4px)" }}
           >
             {/* posts will come here */}
-            {data.map((item) => (
+            {records.map((item) => (
               <React.Fragment key={item.id}>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -132,7 +155,11 @@ function HomePage() {
                       <span className="text-gray-800 font-semibold">
                         Duration :
                       </span>{" "}
-                      {item.Duration}
+                      {item.Duration} {item.DurationType}
+                    </p>
+                    <p className="font-semibold">
+                      Field :{" "}
+                      <span >{item.Tag}</span>
                     </p>
                     <p className="font-semibold">
                       Stipend :{" "}

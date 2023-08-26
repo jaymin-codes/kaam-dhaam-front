@@ -27,12 +27,12 @@ function HomePageCompany() {
   } = useForm();
 
   const gigArea = [
-    { value: "computer", label: "Computer Engg" },
-    { value: "electircal", label: "Electrical Engg" },
-    { value: "civil", label: "Civil Engg" },
-    { value: "mechanical", label: "Mechanical Engg" },
-    { value: "medical", label: "Medical" },
-    { value: "administrative", label: "Administrative" },
+    { value: "Computer Engg", label: "Computer Engg" },
+    { value: "Electrical Engg", label: "Electrical Engg" },
+    { value: "Civil Engg", label: "Civil Engg" },
+    { value: "Mechanical Engg", label: "Mechanical Engg" },
+    { value: "Medical", label: "Medical" },
+    { value: "Administrative", label: "Administrative" },
   ];
 
   const options = [
@@ -92,6 +92,7 @@ function HomePageCompany() {
     setPostDetails(data);
     console.log(data);
     console.log(skills);
+    console.log(selectedArea)
     var Url = window.API_PREFIX + "job/add_job";
     fetch(Url, {
       method: "POST",
@@ -102,9 +103,10 @@ function HomePageCompany() {
         Token: localStorage.getItem("SToken"),
         Title: data["gigTitle"],
         Description: data["gigDescription"],
-        GigArea: data[selectedArea],
+        GigArea: selectedArea,
         Eligibilty: data["eligibiltyCrit"],
-        Duration: data["duration"], // aaiya duration na 2 state variable naaki deje
+        Duration: data["duration"],
+        durationType:data['durationType'],
         Stipend: data["stipend"],
         Skill: skills,
       }),
@@ -169,12 +171,17 @@ function HomePageCompany() {
                       <span className="text-gray-800 font-semibold">
                         Duration :
                       </span>{" "}
-                      {item.Duration}
+                      {item.Duration} {item.DurationType}
+                    </p>
+                    <p className="font-semibold">
+                      Field :{" "}
+                      <span >{item.Tag}</span>
                     </p>
                     <p className="font-semibold">
                       Stipend :{" "}
                       <span className="text-green-600">{item.Budget}</span>
                     </p>
+                    
 
                     <Button
                       className="bg-green-500 text-lg mt-3 w-[130px] h-[35px] flex items-center justify-center"
