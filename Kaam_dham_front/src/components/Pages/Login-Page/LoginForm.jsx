@@ -6,6 +6,10 @@ import { motion } from "framer-motion";
 import { Button } from "react-bootstrap";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
+
+
+
 function LoginForm() {
   const {
     register,
@@ -60,7 +64,7 @@ function LoginForm() {
         } 
         else if (data["status"] === "0") {
           alert(data['message'])
-
+          toast.error("Incorrect email or password!")
         } 
         else {
           alert(data['message'])
@@ -80,8 +84,9 @@ function LoginForm() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
+      <Toaster />
       <div className="flex md:flex-row flex-col">
-        <pre>{JSON.stringify(loginInfo, undefined)}</pre>
+        {/* <pre>{JSON.stringify(loginInfo, undefined)}</pre> */}
         <div
           className="main-form bg-gray-200 h-screen flex justify-center items-center 
       md:w-2/3 w-full p-2"
@@ -104,7 +109,7 @@ function LoginForm() {
                 className="input w-full px-3"
                 {...register("loginEmail", { required: true })}
               />
-              <p>{errors.loginEmail && "Email is required."}</p>
+              <p>{errors.loginEmail && "Email is required." }</p>
             </div>
 
             <div className="p-3">
@@ -125,8 +130,7 @@ function LoginForm() {
             <div className="text-center">
               <button>
                 <Button 
-                
-                className="mt-2 w-[150px] h-[50px] text-2xl font-semibold bg-green-500 text-black">
+                className="mt-2 flex justify-center items-center w-[130px] h-[40px] text-2xl font-semibold bg-green-500 text-black">
                   Log In
                 </Button>
               </button>
