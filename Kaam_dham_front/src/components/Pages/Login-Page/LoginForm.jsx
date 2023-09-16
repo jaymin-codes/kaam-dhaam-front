@@ -22,6 +22,7 @@ function LoginForm() {
     navigate("/");
   }
 
+  // eslint-disable-next-line no-unused-vars
   const [loginInfo, setLoginInfo] = useState();
   const onSubmit = (data) => {
     setLoginInfo(data);
@@ -63,7 +64,7 @@ function LoginForm() {
           }          
         } 
         else if (data["status"] === "0") {
-          alert(data['message'])
+          // alert(data['message'])
           toast.error("Incorrect email or password!")
         } 
         else {
@@ -89,7 +90,7 @@ function LoginForm() {
         {/* <pre>{JSON.stringify(loginInfo, undefined)}</pre> */}
         <div
           className="main-form bg-gray-200 h-screen flex justify-center items-center 
-      md:w-2/3 w-full p-2"
+      md:w-2/3 mr-2 w-full p-2"
         >
           <form action="" onSubmit={handleSubmit(onSubmit)}>
             <p className="md:text-5xl text-3xl text-center font-extrabold mb-2 p-[10px]">
@@ -130,7 +131,7 @@ function LoginForm() {
             <div className="text-center">
               <button>
                 <Button 
-                className="mt-2 flex justify-center items-center w-[130px] h-[40px] text-2xl font-semibold bg-green-500 text-black">
+                className="mt-2 flex justify-center items-center w-[130px] h-[40px] text-2xl font-semibold bg-green-500">
                   Log In
                 </Button>
               </button>

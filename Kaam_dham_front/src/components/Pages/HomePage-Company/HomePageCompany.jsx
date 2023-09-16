@@ -204,9 +204,10 @@ function HomePageCompany() {
             className="flex items-center justify-center w-3/5 py-5"
             style={{
               backgroundImage: `url(${CmpyBg})`,
+              
               backgroundColor: "rgba(255, 255, 255, 0.4)",
               // backdropFilter: 'blur(10px)',
-              backgroundSize: "cover",
+              backgroundSize: "cover",//make bg small !!!
             }}
           >
             <form action="" onSubmit={handleSubmit(onSubmit)}>
