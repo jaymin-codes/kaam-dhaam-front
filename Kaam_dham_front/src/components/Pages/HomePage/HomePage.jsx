@@ -5,6 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 import { motion } from "framer-motion";
 import Select from "react-select";
 import ApplyPopup from "./ApplyPopup";
+import { get } from "react-hook-form";
 
 
 const gigArea = [
@@ -19,6 +20,8 @@ const gigArea = [
 function HomePage() {
   const [selectedArea, setSelectedArea] = useState(null);
   const [data, setData] = useState([]);
+  const [skillapi, setApiSkill] = useState([]);
+
 
   const handleOnChange = (event) => {
     console.log(event['value'])
@@ -49,6 +52,11 @@ function HomePage() {
   };
 
   useEffect(() => {
+    getalljob();
+    getallskill();
+ 
+  }, []);
+  const getalljob=async () =>{
     var Url = window.API_PREFIX + "job/show_job";
     fetch(Url, {
       method: "POST",
@@ -72,7 +80,31 @@ function HomePage() {
         }
         // You can do whatever you want with the data here
       });
-  }, []);
+  }
+  const getallskill=async () =>{
+    var Url = window.API_PREFIX + "job/show_skill";
+    fetch(Url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        Token: localStorage.getItem("SToken"),
+      }),
+    })
+      .then((response) => response.json()) // Parse the response as JSON
+      .then((data) => {
+        // Handle the data returned from the API
+        if (data["status"] === "1") {
+          setApiSkill([...data["all_skill"]]);
+          console.log(data["all_skill"]);
+        } else {
+          alert(data["message"]);
+        }
+        // You can do whatever you want with the data here
+      });
+  }
+
   // const Filter = (event) =>{data.filter(f =>f.)
 
   // }
@@ -114,6 +146,30 @@ function HomePage() {
                     <Select options={gigArea} onChange={handleOnChange}/>
                   </div>
                 </div>
+                <br/>
+                <div className="mb-4">
+                <h1 className="text-md mb-2">Skill</h1>
+                {skillapi.map((i) => (
+              <React.Fragment key={i}>
+                <div className="mb-2">
+                  <label className="inline-flex items-center">
+                    <input type="checkbox" name="weeks" className="form-radio" />
+                    <span className="ml-2">{i}</span>
+                  </label>
+                </div>
+                
+                </React.Fragment>
+                ))}
+                </div>
+                <div className="flex items-center justify-center"><Button
+                      className="flex items-center justify-center bg-green-500 mt-2 text-lg w-[150px] h-[35px] flex items-center justify-center"
+                      onClick={() => {
+                        
+                      }}
+                    >
+                      Apply Filters
+                    </Button></div>
+                
               </div>
             </div>
             {/* Rest of your content */}

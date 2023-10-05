@@ -56,10 +56,18 @@ function HomePageCompany() {
   const [selectedDuration, setSelectedDuration] = useState();
   const [selectedDurationType, setSelectedDurationType] = useState();
   const [data, setData] = useState([]);
+  const [skillapi, setApiSkill] = useState([]);
+
 
   // eslint-disable-next-line no-unused-vars
   const [id, setid] = useState("");
   useEffect(() => {
+    
+    getalljob();
+    getallskill();
+    
+  }, []);
+  const getalljob=async () =>{
     var Url = window.API_PREFIX + "employer/show_job";
     fetch(Url, {
       method: "POST",
@@ -81,8 +89,30 @@ function HomePageCompany() {
         }
         // You can do whatever you want with the data here
       });
-  }, []);
-
+  }
+  const getallskill=async () =>{
+    var Url = window.API_PREFIX + "job/show_skill";
+    fetch(Url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        Token: localStorage.getItem("SToken"),
+      }),
+    })
+      .then((response) => response.json()) // Parse the response as JSON
+      .then((data) => {
+        // Handle the data returned from the API
+        if (data["status"] === "1") {
+          setApiSkill([...data["all_skill"]]);
+          console.log(data['all_skill']);
+        } else {
+          alert(data["message"]);
+        }
+        // You can do whatever you want with the data here
+      });
+  }
   const handleSelect = (selectedOptions) => {
     setSkills(selectedOptions);
     console.log(selectedOptions);
@@ -126,6 +156,7 @@ function HomePageCompany() {
         console.error("Error:", error);
       });
   };
+ 
 
   return (
     <motion.div
