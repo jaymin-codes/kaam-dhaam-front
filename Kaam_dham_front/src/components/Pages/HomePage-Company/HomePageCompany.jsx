@@ -113,6 +113,31 @@ function HomePageCompany() {
         // You can do whatever you want with the data here
       });
   }
+  const [application,setApplication]=useState();
+  const viewbid=async (id) =>{
+    var Url = window.API_PREFIX + "job/view_bid";
+    fetch(Url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        Token: localStorage.getItem("SToken"),
+        id:id,
+      }),
+    })
+      .then((response) => response.json()) // Parse the response as JSON
+      .then((data) => {
+        // Handle the data returned from the API
+        if (data["status"] === "1") {
+          setApplication([...data["bids"]]);
+          console.log(data['bids']);
+        } else {
+          alert(data["message"]);
+        }
+        // You can do whatever you want with the data here
+      });
+  }
   const handleSelect = (selectedOptions) => {
     setSkills(selectedOptions);
     console.log(selectedOptions);
@@ -219,6 +244,7 @@ function HomePageCompany() {
                       onClick={() => {
                         setid(item.id);
                         console.log(item.id);
+                        viewbid(item.id);
                       }}
                     >
                       View Bid

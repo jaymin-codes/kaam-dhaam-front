@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import toast, { Toaster } from 'react-hot-toast';
 
 // eslint-disable-next-line react/prop-types
-function ApplyPopup({ show, handleClose }) {
+function ApplyPopup({ show, handleClose,itemId }) {
   const [bidAmount, setBidAmount] = useState(0);
 
   const handleBidChange = (event) => {
@@ -13,9 +13,10 @@ function ApplyPopup({ show, handleClose }) {
   };
 
   const handleBidSubmit = () => {
+    bidsubmit();
     const submittedBidAmount = bidAmount;
     console.log(submittedBidAmount);
-    
+    console.log(itemId)
     if (submittedBidAmount > 0) {
       toast.success("Good luck with your bid!");
     }
@@ -26,7 +27,30 @@ function ApplyPopup({ show, handleClose }) {
     setBidAmount("");
     handleClose();
   };
-
+  const bidsubmit=async () =>{
+    var Url = window.API_PREFIX + "job/apply_bid";
+    fetch(Url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        Token: localStorage.getItem("SToken"),
+        id: itemId,
+        Amount: bidAmount        
+      }),
+    })
+      .then((response) => response.json()) // Parse the response as JSON
+      .then((data) => {
+        // Handle the data returned from the API
+        if (data["status"] === "1") {
+          console.log("sucess");
+        } else {
+          alert(data["message"]);
+        }
+        // You can do whatever you want with the data here
+      });
+  }
   return (
     <div>
       <Toaster />

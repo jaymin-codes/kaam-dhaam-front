@@ -235,6 +235,7 @@ function HomePage() {
                     <ApplyPopup
                       show={showPopup}
                       handleClose={handleClosePopup}
+                      itemId={id}
                     />
                   </div>
                 </motion.div>
