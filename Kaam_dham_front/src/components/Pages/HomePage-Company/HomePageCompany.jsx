@@ -71,6 +71,7 @@ function HomePageCompany() {
   const [selectedDuration, setSelectedDuration] = useState();
   const [selectedDurationType, setSelectedDurationType] = useState();
   const [data, setData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [skillapi, setApiSkill] = useState([]);
 
 
@@ -128,6 +129,7 @@ function HomePageCompany() {
         // You can do whatever you want with the data here
       });
   }
+  // eslint-disable-next-line no-unused-vars
   const [application,setApplication]=useState();
   const viewbid=async (id) =>{
     var Url = window.API_PREFIX + "job/view_bid";

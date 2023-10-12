@@ -4,11 +4,26 @@ import { motion } from "framer-motion";
 import Button from "react-bootstrap/Button";
 import signupCo from "../../../imgs/signupCo.svg";
 import { useNavigate } from "react-router-dom";
+import TermsCompany from "./TermsCompany";
+
 
 function SignUpFormCo() {
-
   const navigate = useNavigate();
-  
+
+  //terms checkbox
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  //terms popup
+  const [showPopup, setShowPopup] = useState(false);
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
 
   const {
     register,
@@ -16,38 +31,36 @@ function SignUpFormCo() {
     formState: { errors },
   } = useForm();
 
+  // eslint-disable-next-line no-unused-vars
   const [companyInfo, setCompanyInfo] = useState();
   const onSubmit = (data) => {
     setCompanyInfo(data);
-    var Url=window.API_PREFIX+"employer/issue_otp"
+    var Url = window.API_PREFIX + "employer/issue_otp";
     fetch(Url, {
-        method: "POST",
-        headers:{
-            "Content-type": "application/json",
-
-        },
-        body: JSON.stringify({
-          name:data,
-        }),
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: data,
+      }),
     })
-    
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => {
+      .then((response) => response.json()) // Parse the response as JSON
+      .then((data) => {
         // Handle the data returned from the API
-        
-        if (data["status"] === "1") {
-          alert('Submitted')
-          navigate("/otp_company",{ state: { data: data } })
 
+        if (data["status"] === "1") {
+          alert("Submitted");
+          navigate("/otp_company", { state: { data: data } });
         } else {
-          alert(data['message'])
+          alert(data["message"]);
         }
         // You can do whatever you want with the data here
-    })
-    .catch(error => {
+      })
+      .catch((error) => {
         // Handle any errors that occurred during the request
-        console.error('Error:', error);
-    });
+        console.error("Error:", error);
+      });
   };
   // console.log(errors);
   return (
@@ -63,7 +76,7 @@ function SignUpFormCo() {
         </div>
 
         <div className="flex flex-col items-center justify-center md:w-1/2 m-2 p-4">
-          <pre>{JSON.stringify(companyInfo, undefined)}</pre>
+          {/* <pre>{JSON.stringify(companyInfo, undefined)}</pre> */}
           <h1 className="text-2xl"></h1>
           <form action="" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-input">
@@ -86,7 +99,10 @@ function SignUpFormCo() {
               </div>
 
               <div className="input-div my-4">
-                <label htmlFor="companyemail" className="text-xl font-semibold mb-1">
+                <label
+                  htmlFor="companyemail"
+                  className="text-xl font-semibold mb-1"
+                >
                   Email
                 </label>
                 <br />
@@ -117,10 +133,31 @@ function SignUpFormCo() {
                 />
                 <p>{errors.companypass && "Password is required."}</p>
               </div>
+
+              <div className="flex items-center my-4">
+                <input
+                  type="checkbox"
+                  id="termsCheckbox"
+                  onChange={handleCheckboxChange}
+                />
+
+                <a className="ml-2 underline" onClick={handleOpenPopup}>
+                  Agree to terms and conditions
+                </a>
+                <TermsCompany show={showPopup} handleClose={handleClosePopup} />
+              </div>
+
               <div className="flex items-center justify-center">
-                  <Button type="" className="mt-2 font-semibold bg-green-500 text-black">
-                    Submit
-                  </Button>
+                <Button
+                  type=""
+                  className={`mt-2 font-semibold bg-green-500 text-black ${
+                    !isChecked ? "disabled" : ""
+                  }`}
+                  // onClick={handleButtonClick}
+                  disabled={!isChecked}
+                >
+                  Submit
+                </Button>
               </div>
             </div>
           </form>

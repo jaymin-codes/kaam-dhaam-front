@@ -4,12 +4,29 @@ import { motion } from "framer-motion";
 import Button from "react-bootstrap/Button";
 import signup from "../../../imgs/signup.svg";
 import { useNavigate } from "react-router-dom";
+import TermsStudent from "./TermsStudent";
 
 function SignUpForm() {
   const navigate = useNavigate();
   // const OtpButtonClick = () => {
   //   navigate("/otp_verification");
   // };
+
+//terms checkbox
+const [isChecked, setIsChecked] = useState(false);
+const handleCheckboxChange = () => {
+  setIsChecked(!isChecked);
+};
+
+//terms popup
+const [showPopup, setShowPopup] = useState(false);
+const handleOpenPopup = () => {
+  setShowPopup(true);
+};
+const handleClosePopup = () => {
+  setShowPopup(false);
+};
+
 
   const {
     register,
@@ -119,10 +136,28 @@ function SignUpForm() {
                 />
                 <p>{errors.password && "Password is required."}</p>
               </div>
+
+              <div className="flex items-center my-4">
+                <input
+                  type="checkbox"
+                  id="termsCheckbox"
+                  onChange={handleCheckboxChange}
+                />
+
+                <a className="ml-2 underline" onClick={handleOpenPopup}>
+                  Agree to terms and conditions
+                </a>
+                <TermsStudent show={showPopup} handleClose={handleClosePopup} />
+              </div>
+
               <div className="flex items-center justify-center">
                 <Button
                   type=""
-                  className="mt-2 font-semibold bg-green-500 text-black"
+                  className={`mt-2 font-semibold bg-green-500 text-black ${
+                    !isChecked ? "disabled" : ""
+                  }`}
+                  // onClick={handleButtonClick}
+                  disabled={!isChecked}
                 >
                   Submit
                 </Button>
