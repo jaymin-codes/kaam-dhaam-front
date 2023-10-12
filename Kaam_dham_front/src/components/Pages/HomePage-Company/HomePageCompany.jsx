@@ -6,8 +6,9 @@ import Button from "react-bootstrap/esm/Button";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
-import CmpyBg from "../../../imgs/company_home_bg.png";
+import CmpyBg from "../../../imgs/company_home_bg.png";  
 import NavBarInsideCmpny from "../../NavbarInsideCmpny/NavbarInsideCmpny";
+import PopupCompany from "./PopupCompany";
 
 
 const customStyles = {
@@ -16,7 +17,12 @@ const customStyles = {
     borderColor: "black",
     borderRadius: "0.5rem",
     borderWidth: "2px",
+    // menu: (provided) => ({
+    //   ...provided,
+    //   zIndex: 0, // Set the desired z-index value
+    // }),
   }),
+  
 };
 
 function HomePageCompany() {
@@ -50,6 +56,15 @@ function HomePageCompany() {
   const handleGigArea = (e) => {
     setSelectedArea(e);
     console.log(e);
+  };
+
+//popup section
+  const [showPopup, setShowPopup] = useState(false);
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
   //duration add kri deje submit action ma
@@ -187,14 +202,14 @@ function HomePageCompany() {
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.5 }}
     >
-      <div>
+      <div className="bg-gray-100">
         <NavBarInsideCmpny />
 
-        <div className="flex flex-row container mt-5">
+        <div className="flex flex-row container mt-5 ">
           <div
-            className="w-2/5 overflow-y-auto"
+            className="w-2/5 overflow-y-auto fixed"
             style={{ maxHeight: "calc(100vh - 4rem - 4px)" }}
           >
             {data.map((item) => (
@@ -245,10 +260,15 @@ function HomePageCompany() {
                         setid(item.id);
                         console.log(item.id);
                         viewbid(item.id);
+                        handleOpenPopup();
                       }}
                     >
                       View Bid
                     </Button>
+                    <PopupCompany
+                      show={showPopup}
+                      handleClose={handleClosePopup}
+                    />
                   </div>
                 </motion.div>
 
@@ -258,16 +278,16 @@ function HomePageCompany() {
           </div>
 
           <div
-            className="flex items-center justify-center w-3/5 py-5"
+            className="flex items-center justify-center w-3/5 py-5 ml-[40%]"
             style={{
               backgroundImage: `url(${CmpyBg})`,
               
-              backgroundColor: "rgba(255, 255, 255, 0.4)",
+              backgroundColor: "rgba(255, 255, 255, 0.3)",
               // backdropFilter: 'blur(10px)',
               backgroundSize: "cover",//make bg small !!!
             }}
           >
-            <form action="" onSubmit={handleSubmit(onSubmit)}>
+            <form action="" onSubmit={handleSubmit(onSubmit)} >
               <div className="p-2 m-2">
                 <label className=" font-semibold text-lg" htmlFor="gigTitle">
                   Gig Title
@@ -305,14 +325,14 @@ function HomePageCompany() {
                 </p>
               </div>
 
-              <div className="p-2 m-2">
+              <div className="p-2 m-2 z-0">
                 <label className=" font-semibold text-lg" htmlFor="gigArea">
                   Gig Area
                 </label>
                 <br />
                 <Select
                   styles={customStyles}
-                  options={gigArea}
+                  options={gigArea} 
                   onChange={handleGigArea}
                 />
               </div>
@@ -352,22 +372,7 @@ function HomePageCompany() {
                   styles={customStyles}
                   className="border-1 rounded-lg"
                 />
-                {/* <Multiselect
-                  options={skills}
-                  selectedValues={[]}
-                  displayValue="name"
-                  onInputChange={onInputChange}
-                  onSelect={(event) => {
-                    // setlist(event);
-                    console.log(event);
-                    //inserts the selected option in array
-                  }}
-                  onRemove={(event) => {
-                    // setlist(event);
-                    console.log(event);
-                    //removes the selected opton in array
-                  }}
-                /> */}
+
               </div>
 
               <div className="p-2 m-2">

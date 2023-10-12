@@ -120,8 +120,10 @@ function HomePage() {
 
         <div className="flex flex-row p-2">
 
-          <div className="flex flex-row p-2 bg-gray-100 w-1/5">
-            <div className="w-full bg-white rounded shadow-md p-4">
+          <div className="flex flex-row p-2 bg-gray-100 w-1/5 overflow-y-auto"
+               style={{ maxHeight: "calc(100vh - 4rem - 4px)"}}
+          >
+            <div className="w-full bg-white rounded shadow-md p-4 overflow-y-auto">
               <div className="h-full flex flex-col">
                 <h1 className="text-xl font-semibold mb-4">Filters</h1>
                 <div className="mb-4">
@@ -141,14 +143,14 @@ function HomePage() {
                 </div>
                 
                 <div className="w-full">
-                  <h1 className="text-md mb-2">Gig Area</h1>
+                  <h1 className="text-md mb-2 font-semibold">Gig Area</h1>
                   <div>
                     <Select options={gigArea} onChange={handleOnChange}/>
                   </div>
                 </div>
                 <br/>
                 <div className="mb-4">
-                <h1 className="text-md mb-2">Skill</h1>
+                <h1 className="text-md mb-2 font-semibold">Skill</h1>
                 {skillapi.map((i) => (
               <React.Fragment key={i}>
                 <div className="mb-2">
@@ -161,8 +163,8 @@ function HomePage() {
                 </React.Fragment>
                 ))}
                 </div>
-                <div className="flex items-center justify-center"><Button
-                      className="flex items-center justify-center bg-green-500 mt-2 text-lg w-[150px] h-[35px] flex items-center justify-center"
+                <div className="flex items-center justify-center pb-4"><Button
+                      className="flex items-center justify-center bg-green-500 mt-2 text-lg w-[150px] h-[35px]"
                       onClick={() => {
                         
                       }}
