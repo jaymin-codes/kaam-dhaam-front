@@ -4,7 +4,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // eslint-disable-next-line react/prop-types
-function PopupCompany({ show, handleClose }) {
+function PopupCompany({ show, handleClose,appdata }) {
   return (
     <div>
       <div
@@ -26,75 +26,32 @@ function PopupCompany({ show, handleClose }) {
             </button>
 
             <div style={{ maxHeight: "400px", overflowY: "auto" }}>
-
-              <div className="p-2 bg-white rounded shadow-md">
+            {appdata.map((item) => (
+              <React.Fragment key={item.id}>
+                 <div className="p-2 bg-white rounded shadow-md">
                 <h2 className="text-lg font-medium mb-1"></h2>
                 <p className="text-gray-600 mb-2">
-                  <span className="text-gray-800">Name :</span>
+                  <span className="text-gray-800">Name : {item.Username}</span>
                 </p>
                 <p className="text-gray-600 mb-2">
-                  <span className="text-gray-800">Bid :</span>
+                  <span className="text-gray-800">Bid : {item.Bid}</span>
                 </p>
                 <p className="mb-1">
-                  <span className="text-gray-800">Email :</span>
+                  <span className="text-gray-800">Email : {item.Email}</span>
                 </p>
                 <p className="mb-1">
-                  <span className="text-gray-800">Contact No :</span>
+                  <span className="text-gray-800">Contact No : {item.Num}</span>
                 </p>
                 <p className="mb-1">
-                  <span className="text-gray-800">College/University :</span>
+                  <span className="text-gray-800">College/University : {item.Collage}</span>
                 </p>
               </div>
+                </React.Fragment>
+            ))}
+
+             
 
 
-              {/* Just for example */}
-
-              
-              <div className="p-2 bg-white rounded shadow-md">
-                <h2 className="text-lg font-medium mb-1"></h2>
-                <p className="text-gray-600 mb-2">
-                  <span className="text-gray-800">Name :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">Email :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">Contact No :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">College/University :</span>
-                </p>
-              </div>
-              <div className="p-2 bg-white rounded shadow-md ">
-                <h2 className="text-lg font-medium mb-1"></h2>
-                <p className="text-gray-600 mb-2">
-                  <span className="text-gray-800">Name :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">Email :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">Contact No :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">College/University :</span>
-                </p>
-              </div>
-              <div className="p-2 bg-white rounded shadow-md">
-                <h2 className="text-lg font-medium mb-1"></h2>
-                <p className="text-gray-600 mb-2">
-                  <span className="text-gray-800">Name :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">Email :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">Contact No :</span>
-                </p>
-                <p className="mb-1">
-                  <span className="text-gray-800">College/University :</span>
-                </p>
-              </div>
             </div>
           </div>
         </div>

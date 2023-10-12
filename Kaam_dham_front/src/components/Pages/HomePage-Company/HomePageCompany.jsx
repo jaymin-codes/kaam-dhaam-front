@@ -270,6 +270,7 @@ function HomePageCompany() {
                     <PopupCompany
                       show={showPopup}
                       handleClose={handleClosePopup}
+                      appdata={application}
                     />
                   </div>
                 </motion.div>
