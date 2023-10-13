@@ -18,7 +18,7 @@ import Otp from "./components/Pages/Otp-company/Otp";
 import HomePageCompany from "./components/Pages/HomePage-Company/HomePageCompany";
 import NotificationPageCompany from "./components/Pages/NotificationPage-Company/NotificationPageCompany";
 import SearchPageCompany from "./components/Pages/SearchPage-Company/SearchPageCompany";
-
+import Viewbid from "./components/Pages/HomePage-Company/Viewbid";
 
 window.API_PREFIX = 'http://localhost:8000/'
 function App() {
@@ -46,6 +46,8 @@ function App() {
           <Route path="/HomePage_Company" element={<HomePageCompany />} />
           <Route path="/Notification_Company" element={<NotificationPageCompany />} />
           <Route path="/SearchPage_Company" element={<SearchPageCompany />} />
+          <Route path="/viewbid" element={<Viewbid />} />
+
 
         </Routes>
       </div>
