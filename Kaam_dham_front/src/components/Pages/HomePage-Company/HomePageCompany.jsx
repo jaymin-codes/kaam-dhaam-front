@@ -130,7 +130,7 @@ function HomePageCompany() {
       });
   }
   // eslint-disable-next-line no-unused-vars
-  const [application,setApplication]=useState();
+  const [application,setApplication]=useState([]);
   const viewbid=async (id) =>{
     var Url = window.API_PREFIX + "job/view_bid";
     fetch(Url, {

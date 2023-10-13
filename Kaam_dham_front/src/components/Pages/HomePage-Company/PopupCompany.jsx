@@ -4,7 +4,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // eslint-disable-next-line react/prop-types
-function PopupCompany({ show, handleClose }) {
+function PopupCompany({ show, handleClose,appdata }) {
   return (
     <div>
       <div
@@ -26,7 +26,7 @@ function PopupCompany({ show, handleClose }) {
             </button>
 
             <div style={{ maxHeight: "400px", overflowY: "auto" }}>
-            {/* {appdata.map((item) => (
+            {appdata.map((item) => (
               <React.Fragment key={item.id}>
                  <div className="p-2 bg-white rounded shadow-md">
                 <h2 className="text-lg font-medium mb-1"></h2>
@@ -47,7 +47,7 @@ function PopupCompany({ show, handleClose }) {
                 </p>
               </div>
                 </React.Fragment>
-            ))} */}
+            ))}
 
              
 
