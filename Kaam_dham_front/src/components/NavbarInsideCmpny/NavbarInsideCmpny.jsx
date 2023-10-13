@@ -33,7 +33,7 @@ function NavBarInsideCmpny() {
           <Nav className="me-auto md:pt-[3px] font-medium text-black">
             <Nav.Link href="/HomePage_Company">Home</Nav.Link>
             <Nav.Link href="/viewbid">View Bids</Nav.Link>
-            <Nav.Link href="/SearchPage_Company">Search</Nav.Link>
+            {/* <Nav.Link href="/SearchPage_Company">Search</Nav.Link> */}
             <Nav.Link href="#link">About Us</Nav.Link>
             {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
