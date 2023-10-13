@@ -8,7 +8,7 @@ import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import CmpyBg from "../../../imgs/company_home_bg.png";  
 import NavBarInsideCmpny from "../../NavbarInsideCmpny/NavbarInsideCmpny";
-import PopupCompany from "./PopupCompany";
+// import PopupCompany from "./PopupCompany";
 
 
 const customStyles = {
@@ -59,13 +59,13 @@ function HomePageCompany() {
   };
 
 //popup section
-  const [showPopup, setShowPopup] = useState(false);
-  const handleOpenPopup = () => {
-    setShowPopup(true);
-  };
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
+  // const [showPopup, setShowPopup] = useState(false);
+  // const handleOpenPopup = () => {
+  //   setShowPopup(true);
+  // };
+  // const handleClosePopup = () => {
+  //   setShowPopup(false);
+  // };
 
   //duration add kri deje submit action ma
   const [selectedDuration, setSelectedDuration] = useState();
@@ -256,7 +256,7 @@ function HomePageCompany() {
                     </p>
                     
 
-                    <Button
+                    {/* <Button
                       className="bg-green-500 text-lg mt-3 w-[130px] h-[35px] flex items-center justify-center"
                       onClick={() => {
                         setid(item.id);
@@ -271,7 +271,7 @@ function HomePageCompany() {
                       show={showPopup}
                       handleClose={handleClosePopup}
                       appdata={application}
-                    />
+                    /> */}
                   </div>
                 </motion.div>
 
